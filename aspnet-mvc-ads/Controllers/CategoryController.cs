@@ -2,11 +2,10 @@
 
 namespace aspnet_mvc_ads.Controllers
 {
-    public class PageController : Controller
+    public class CategoryController : Controller
     {
         public IActionResult Index()
         {
-          
             return View();
         }
     }
