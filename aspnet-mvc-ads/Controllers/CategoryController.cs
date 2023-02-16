@@ -4,7 +4,7 @@ namespace aspnet_mvc_ads.Controllers
 {
     public class CategoryController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int id, int page)
         {
             return View();
         }

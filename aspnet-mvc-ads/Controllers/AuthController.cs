@@ -6,7 +6,6 @@ namespace aspnet_mvc_ads.Controllers
     {
         public IActionResult Index()
         {
-            var x= 12;
             return View();
         }
     }
