@@ -9,5 +9,15 @@ namespace aspnet_mvc_ads.Controllers
           
             return View();
         }
+
+        public IActionResult Detail(int id)
+        {
+
+            return View();
+        }
+
+
+
+
     }
 }
