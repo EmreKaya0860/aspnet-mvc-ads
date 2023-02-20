@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\template\css\" />
+    <Folder Include="wwwroot\template\js\" />
+  </ItemGroup>
+
 </Project>
