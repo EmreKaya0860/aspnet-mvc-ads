@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<section class="login py-5 border-top-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8 align-item-center">
+                <div class="border border">
+                    <h3 class="bg-gray p-4">Hemen Kayıt Ol</h3>
+                    <form action="#">
+                        <fieldset class="p-4">
+                            <input type="email" placeholder="Email*" class="border p-3 w-100 my-2">
+                            <input type="password" placeholder="Parola*" class="border p-3 w-100 my-2">
+                            <input type="password" placeholder="Parolayı Onayla*" class="border p-3 w-100 my-2">
+                            <div class="loggedin-forgot d-inline-flex my-3">
+                                <input type="checkbox" id="registering" class="mt-1">
+                                <label for="registering" class="px-2">Kayıt olarak, <a class="text-primary font-weight-bold" href="terms-condition.html">Şart & Koşullar</a>'ı kabul ediyorsunuz.</label>
+                            </div>
+                            <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold">Kayıt Ol</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
