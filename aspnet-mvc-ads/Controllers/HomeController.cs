@@ -15,6 +15,7 @@ namespace aspnet_mvc_ads.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 
