@@ -13,7 +13,7 @@ namespace App.Data.Entity
 
         public int UserId { get; set; }
        
-        public User? User { get; set; }
+        public User User { get; set; }
 
 
 
