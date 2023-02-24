@@ -13,9 +13,9 @@ namespace App.Data.Entity
         [Display(Name = "İlan Açıklaması")]
         public string? Description { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
        
-        public User User { get; set; }
+        public User? User { get; set; }
 
 
 

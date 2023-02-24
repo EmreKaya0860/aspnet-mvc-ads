@@ -11,9 +11,9 @@ namespace App.Data.Entity
     {
         public int Id { get; set; }
 
-        public int AdvertId { get; set; }
+        public int? AdvertId { get; set; }
 
-        public Advert Advert { get; set; }
+        public Advert? Advert { get; set; }
 
         [StringLength(200), Display(Name = "Resim Yolu")]
         public string ImagePath { get; set; }
