@@ -10,7 +10,7 @@ namespace App.Data.Entity
         public string Name { get; set; }
 
         [Display(Name = "Ayar Değeri") , StringLength(200)]
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
         public int UserId { get; set; }
 
