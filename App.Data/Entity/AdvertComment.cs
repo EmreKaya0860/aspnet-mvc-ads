@@ -16,7 +16,10 @@ namespace App.Data.Entity
         public Advert? Advert { get; set; }
 
         
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62ed73831eaedecf80eaf61372fc306d9f2cb065
         [Display(Name="Yorum")]
 
         public string? Comment { get; set; }
