@@ -64,7 +64,7 @@ namespace App.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,8 +73,7 @@ namespace App.Data.Migrations
                         name: "FK_Adverts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +84,7 @@ namespace App.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,8 +93,7 @@ namespace App.Data.Migrations
                         name: "FK_Settings_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -104,8 +102,7 @@ namespace App.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AdvertId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    AdvertId = table.Column<int>(type: "int", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -116,14 +113,7 @@ namespace App.Data.Migrations
                         name: "FK_AdvertComments_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AdvertComments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -132,7 +122,7 @@ namespace App.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AdvertId = table.Column<int>(type: "int", nullable: false),
+                    AdvertId = table.Column<int>(type: "int", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
@@ -142,8 +132,7 @@ namespace App.Data.Migrations
                         name: "FK_AdvertImages_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -152,8 +141,8 @@ namespace App.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    AdvertId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    AdvertId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,25 +151,18 @@ namespace App.Data.Migrations
                         name: "FK_CategoryAdverts_Adverts_AdvertId",
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CategoryAdverts_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdvertComments_AdvertId",
                 table: "AdvertComments",
                 column: "AdvertId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AdvertComments_UserId",
-                table: "AdvertComments",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdvertImages_AdvertId",

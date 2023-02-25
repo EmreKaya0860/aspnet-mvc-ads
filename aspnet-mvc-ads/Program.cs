@@ -6,10 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDbContext<DatabaseContext>();
+
+
 var app = builder.Build();
 
-builder.Services.AddDbContext<DatabaseContext>();
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+//builder.Services.AddDbContext<DatabaseContext>();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

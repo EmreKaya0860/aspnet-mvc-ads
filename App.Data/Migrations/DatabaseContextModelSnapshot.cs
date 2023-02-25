@@ -65,14 +65,9 @@ namespace App.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AdvertId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("AdvertComments");
                 });
@@ -250,13 +245,7 @@ namespace App.Data.Migrations
                         .WithMany("AdvertComments")
                         .HasForeignKey("AdvertId");
 
-                    b.HasOne("App.Data.Entity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Advert");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("App.Data.Entity.AdvertImage", b =>

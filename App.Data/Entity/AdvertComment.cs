@@ -15,9 +15,7 @@ namespace App.Data.Entity
 
         public Advert? Advert { get; set; }
 
-        public int? UserId { get; set; }
-
-        public User? User { get; set; }  
+        
 
         [Display(Name="Yorum")]
 
