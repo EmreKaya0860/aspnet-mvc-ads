@@ -21,7 +21,7 @@ namespace App.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;database=AspNetMVCAds;integrated security=true; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-U9EHNUP;database=AspNetMVCAds;integrated security=true; TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
 

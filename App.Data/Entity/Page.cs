@@ -19,7 +19,7 @@ namespace App.Data.Entity
 
 
         [Display(Name = "İçerik")]
-        public string Context { get; set; }
+        public string Content { get; set; }
 
 
 
