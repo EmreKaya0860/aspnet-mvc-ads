@@ -8,8 +8,8 @@ using System.Xml.Linq;
 
 namespace App.Data.Entity
 {
-    public class Category
-    {
+    public class Category : IAuiditEntity
+	{
         public int Id { get; set; }
         [Required(ErrorMessage = "{0} alanı boş geçilemez!"), StringLength(100), Display(Name = "Kategori İsmi")]
         public string Name { get; set; }

@@ -2,8 +2,8 @@
 
 namespace App.Data.Entity
 {
-    public class Setting
-    {
+    public class Setting : IAuiditEntity
+	{
         public int Id { get; set; }
 
         [Required(ErrorMessage = "{0} alanı boş geçilemez!"), StringLength(200), Display(Name = "Ayar Adı ")]

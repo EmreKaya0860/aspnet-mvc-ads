@@ -8,8 +8,8 @@ using System.Xml.Linq;
 
 namespace App.Data.Entity
 {
-    public class Page
-    {
+    public class Page : IAuiditEntity
+	{
         public int Id { get; set; }
 
 

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entity
 {
-    public class AdvertImage
-    {
+    public class AdvertImage : IAuiditEntity
+	{
         public int Id { get; set; }
 
         public int? AdvertId { get; set; }

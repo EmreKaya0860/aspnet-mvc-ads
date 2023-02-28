@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entity
 {
-    public class User
-    {
+    public class User : IAuiditEntity
+	{
         public int Id { get; set; }
 
 
@@ -25,7 +25,7 @@ namespace App.Data.Entity
 
 
         [Display(Name = "Telefon"), StringLength(20)]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
 
         [Display(Name = "Adres"), StringLength(200)]

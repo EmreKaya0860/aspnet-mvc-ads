@@ -2,8 +2,8 @@
 
 namespace App.Data.Entity
 {
-    public class Advert
-    {
+    public class Advert : IAuiditEntity
+	{
 
         public int Id { get; set; }
         [Required(ErrorMessage = "{0} alanı boş geçilemez!"), StringLength(200), Display(Name = "İlan Başlığı")]

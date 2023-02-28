@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entity
 {
-    public class CategoryAdvert
-    {
+    public class CategoryAdvert : IAuiditEntity
+	{
         public int Id { get; set; }
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
