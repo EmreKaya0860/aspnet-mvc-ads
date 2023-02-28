@@ -1,4 +1,8 @@
 using App.Data;
+using App.Data.Abstract;
+using App.Data.Concrete;
+using App.Service.Abstract;
+using App.Service.Concrete;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
 
 
 var app = builder.Build();

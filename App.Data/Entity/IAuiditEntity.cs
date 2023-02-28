@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.Data.Entity
 {
-	public class IAuiditEntity
+	public interface IAuiditEntity
 	{
 
 		public int Id { get; set; }

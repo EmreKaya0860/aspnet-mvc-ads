@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnet-mvc-ads", "aspnet-mvc-ads\aspnet-mvc-ads.csproj", "{54B5F33F-3A71-4A73-BAF7-F749728375A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Data", "App.Data\App.Data.csproj", "{73321D0A-B4B7-4CCC-BC1A-286B4FDC30E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Data", "App.Data\App.Data.csproj", "{73321D0A-B4B7-4CCC-BC1A-286B4FDC30E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Service", "App.Service\App.Service.csproj", "{14DB9639-A209-450E-973B-DED15145D9F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{73321D0A-B4B7-4CCC-BC1A-286B4FDC30E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73321D0A-B4B7-4CCC-BC1A-286B4FDC30E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73321D0A-B4B7-4CCC-BC1A-286B4FDC30E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14DB9639-A209-450E-973B-DED15145D9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14DB9639-A209-450E-973B-DED15145D9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14DB9639-A209-450E-973B-DED15145D9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14DB9639-A209-450E-973B-DED15145D9F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
