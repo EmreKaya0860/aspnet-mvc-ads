@@ -24,7 +24,7 @@ namespace App.Data.Entity
         public string Password { get; set; }
 
 
-        [Display(Name = "Telefon"), StringLength(20)]
+        [Display(Name = "Telefon"), StringLength(11)]
         public string Phone { get; set; }
 
 

@@ -30,60 +30,37 @@ namespace App.Data
 			modelBuilder.Entity<User>().HasData(
 				
 				new User { 
-					
-					
 					Id = 1, 
-				Name="admin",
-				Email="admin@blog.com",
-				Password="123",
-				Phone="2342323",
-				Address="samsun",
-
-
-				}
-				
-				
-				);
-
-
-
+					Name="admin",
+					Email="admin@blog.com",
+					Password="123",
+					Phone="23423231111",
+					Address="samsun",
+				});
 			modelBuilder.Entity<Category>().HasData(
 
 				new Category
 				{
-
-
 					Id = 1,
 					Name="Teknoloji",
 					Description="Teknolojik Ürünler"
-				
-					
-
-
-				}
-
-
-				);
-
+				});
 
 			modelBuilder.Entity<Advert>().HasData(
 
 				new Advert
 				{
-
-
 					Id = 1,
 					Title="Iphone"
-					
-					
+				});
 
-
-
-				}
-
-
-				);
-
+			modelBuilder.Entity<CategoryAdvert>().HasData(
+				new CategoryAdvert
+				{
+					Id = 1,
+					CategoryId = 1,
+					AdvertId = 1
+				});
 
 
 
