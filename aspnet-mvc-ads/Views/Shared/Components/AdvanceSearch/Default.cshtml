@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CategoryAdvert>
+﻿@model IEnumerable<Category>
 
 @{
 }
@@ -8,17 +8,17 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-12 col-md-12 align-content-center">
-				<form asp-action="">
+				<form asp-controller="Advert" asp-action="Search">
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<input name="search" type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
+							<input name="query" type="text" class="form-control my-2 my-lg-1" id="inputtext4" placeholder="What are you looking for">
 						</div>
 						<div class="form-group col-md-3">
-							<select class="w-100 form-control mt-lg-1 mt-md-2">
+							<select name="CategoryId" class="w-100 form-control mt-lg-1 mt-md-2">
 								
 								@foreach (var category in Model)
 								{
-									<option>@category.Category.Name</option>
+									<option value="@category.Id">@category.Name</option>
 								}
 							</select>
 						</div>

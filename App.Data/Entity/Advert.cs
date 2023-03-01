@@ -23,7 +23,7 @@ namespace App.Data.Entity
 
         public virtual List<AdvertImage>? AdvertImages { get; set; }
 
-        public virtual List<CategoryAdvert>? CategoryAdverts { get; set; }
+        public virtual List<Category>? Category { get; set; }
 
     }
 }

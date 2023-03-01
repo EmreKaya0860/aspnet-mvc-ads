@@ -1,4 +1,6 @@
-﻿using aspnet_mvc_ads.Models;
+﻿using App.Data.Entity;
+using App.Service.Abstract;
+using aspnet_mvc_ads.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,11 +8,11 @@ namespace aspnet_mvc_ads.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IService<Category> _CategoryService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IService<Category> categoryService)
         {
-            _logger = logger;
+            _CategoryService = categoryService;
         }
 
         public IActionResult Index()
@@ -22,6 +24,15 @@ namespace aspnet_mvc_ads.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View(_CategoryService.GetAll());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

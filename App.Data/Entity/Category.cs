@@ -15,6 +15,6 @@ namespace App.Data.Entity
         public string Name { get; set; }
         [StringLength(200), Display(Name = "Kategori Açıklaması")]
         public string Description { get; set; }
-        public virtual List<CategoryAdvert>? CategoryAdverts { get; set; }
+        public virtual List<Advert>? Adverts{ get; set; }
     }
 }
