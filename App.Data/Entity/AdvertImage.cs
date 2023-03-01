@@ -13,7 +13,7 @@ namespace App.Data.Entity
 
         public int? AdvertId { get; set; }
 
-        public Advert? Advert { get; set; }
+        public virtual Advert? Advert { get; set; }
 
         [StringLength(200), Display(Name = "Resim Yolu")]
         public string ImagePath { get; set; }

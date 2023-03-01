@@ -13,10 +13,10 @@ namespace App.Data.Entity
 
         public int? AdvertId { get; set; }
 
-        public Advert? Advert { get; set; }
+        public virtual Advert? Advert { get; set; }
 
         public int userID { get; set; }
-        public User? user { get; set; }
+        public virtual User? user { get; set; }
 
         [Display(Name="Yorum")]
 

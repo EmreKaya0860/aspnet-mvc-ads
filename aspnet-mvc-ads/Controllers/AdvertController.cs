@@ -4,7 +4,7 @@ namespace aspnet_mvc_ads.Controllers
 {
     public class AdvertController : Controller
     {
-        public IActionResult Search(string q, int page)
+        public IActionResult Search(string query, int page)
         {
             return View();
         }

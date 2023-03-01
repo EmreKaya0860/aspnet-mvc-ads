@@ -21,6 +21,7 @@ namespace App.Data
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
+			optionsBuilder.UseLazyLoadingProxies();
 			optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;database=AspNetMVCAds;integrated security=true; TrustServerCertificate=True");
 			base.OnConfiguring(optionsBuilder);
 		}
@@ -66,16 +67,16 @@ namespace App.Data
 
 
 
-			//modelBuilder.Entity<Card>()
-			//    .HasRequired(c => c.Stage)
-			//    .WithMany()
-			//    .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Card>()
+            //    .HasRequired(c => c.Stage)
+            //    .WithMany()
+            //    .WillCascadeOnDelete(false);
 
-			//modelBuilder.Entity<Side>()
-			//    .HasRequired(s => s.Stage)
-			//    .WithMany()
-			//    .WillCascadeOnDelete(false);
-			base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Side>()
+            //    .HasRequired(s => s.Stage)
+            //    .WithMany()
+            //    .WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
 		}
 
 	}

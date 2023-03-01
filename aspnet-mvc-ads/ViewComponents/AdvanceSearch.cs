@@ -6,16 +6,18 @@ namespace aspnet_mvc_ads.ViewComponents
 {
     public class AdvanceSearch : ViewComponent
     {
-        private readonly IService<CategoryAdvert> _service;
+        private readonly IService<Category> _service;
 
-        public AdvanceSearch(IService<CategoryAdvert> service)
+        public AdvanceSearch(IService<Category> service)
         {
             _service = service;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int CategoryID, string search)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _service.GetAllAsync(a=> a.CategoryId == CategoryID && a.Advert.Title == search));
+            var categories = await _service.GetAllAsync();
+
+            return View(categories);
         }
     }
 }
