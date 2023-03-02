@@ -1,4 +1,4 @@
-﻿
+﻿@model Advert
 @{
     ViewData["Title"] = "Detail";
 }
@@ -45,14 +45,27 @@
 				<!-- Left sidebar -->
 				<div class="col-md-8">
 					<div class="product-details">
-						<h1 class="product-title">Hp Dual Core 2gb Ram-Slim Laptop Available In Very Low Price</h1>
+						<h1 class="product-title"> @Model.Title </h1>
 						<div class="product-meta">
+
 							<ul class="list-inline">
-								<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">Andrew</a></li>
-								<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
-								<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
+								<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href=""> @Model.User.Name </a></li>
+								@foreach (var item in Model.Category)
+								{
+
+									<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> @item.Name <a href="">/a></li>
+
+
+								}
+
+								
+
 							</ul>
 						</div>
+
+
+
+
 
 						<!-- product slider -->
 						<div class="product-slider">
@@ -72,7 +85,36 @@
 								<img class="d-block img-fluid w-100" src="~/images/products/products-2.jpg" alt="Third slide">
 							</div>
 						</div>
+
+
+						<!-- product slider -- model ile yaptığım -->
+
+						@*<div class="product-slider">
+
+							@foreach(var item in Model.AdvertImages)
+
+							{
+							<div class="product-slider-item my-4" data-image="/images/products/products-1.jpg">
+								<img class="img-fluid w-100" src=@item.ImagePath alt="product-img">
+							</div>
+							}
+						</div>*@
+
+
 						<!-- product slider -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 						<div class="content mt-5 pt-5">
 							<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
@@ -93,13 +135,7 @@
 								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 									<h3 class="tab-title">Product Description</h3>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia laudantium beatae quod perspiciatis, neque
-										dolores eos rerum, ipsa iste cum culpa numquam amet provident eveniet pariatur, sunt repellendus quas
-										voluptate dolor cumque autem molestias. Ab quod quaerat molestias culpa eius, perferendis facere vitae commodi
-										maxime qui numquam ex voluptatem voluptate, fuga sequi, quasi! Accusantium eligendi vitae unde iure officia
-										amet molestiae velit assumenda, quidem beatae explicabo dolore laboriosam mollitia quod eos, eaque voluptas
-										enim fuga laborum, error provident labore nesciunt ad. Libero reiciendis necessitatibus voluptates ab
-										excepturi rem non, nostrum aut aperiam? Itaque, aut. Quas nulla perferendis neque eveniet ullam?
+										@Model.Description
 									</p>
 
 									<iframe width="100%" height="400" src="https://www.youtube.com/embed/LUH7njvhydE?rel=0&amp;controls=0&amp;showinfo=0"
@@ -183,17 +219,32 @@
 													</ul>
 												</div>
 												<div class="name">
-													<h5>Jessica Brown</h5>
+												
+													<h5>@Model.User.Name</h5>
 												</div>
 												<div class="date">
 													<p>Mar 20, 2018</p>
 												</div>
-												<div class="review-comment">
-													<p>
-														Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe laudant tota rem ape
-														riamipsa eaque.
-													</p>
-												</div>
+
+
+												@foreach(var item in Model.AdvertComments)
+
+												{
+													<div class="review-comment">
+														<p>
+															@item.Comment
+														</p>
+													</div>
+
+
+
+												}
+
+												
+
+
+
+
 											</div>
 										</div>
 										<div class="review-submission">
@@ -234,8 +285,12 @@
 						<!-- User Profile widget -->
 						<div class="widget user text-center">
 							<img class="rounded-circle img-fluid mb-5 px-5" src="~/images/user/user-thumb.jpg" alt="">
-							<h4><a href="">Jonathon Andrew</a></h4>
-							<p class="member-time">Member Since Jun 27, 2017</p>
+							
+							
+							<h4><a href="">@Model.User.Name</a></h4>
+
+
+							<p class="member-time">@Model.User.Email</p>
 							<a href="">See all ads</a>
 							<ul class="list-inline mt-20">
 								<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>

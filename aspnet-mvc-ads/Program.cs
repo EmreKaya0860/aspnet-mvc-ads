@@ -15,6 +15,10 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
 builder.Services.AddTransient<ICategoryAdvertService, CategoryAdvertService>();
 
+builder.Services.AddTransient<IAdvertService, AdvertService>(); 
+
+
+
 
 var app = builder.Build();
 

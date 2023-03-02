@@ -131,6 +131,9 @@
 							</div>
 						</div>
 					</div>
+
+
+
 					<div class="product-grid-list">
 						<div class="row mt-30">
 
@@ -146,7 +149,7 @@
 											<div class="card">
 												<div class="thumb-content">
 													<!-- <div class="price">$200</div> -->
-													<a href="single.html">
+													<a asp-controller="Advert" asp-action="Detail" asp-route-id="@category.Id">
 														<img class="card-img-top img-fluid" src="~/images/products/products-1.jpg" alt="Card image cap">
 													</a>
 												</div>
@@ -154,10 +157,15 @@
 													<h4 class="card-title"><a href="single.html">@advert.Title</a></h4>
 													<ul class="list-inline product-meta">
 														<li class="list-inline-item">
-															<a href="single.html"><i class="fa fa-folder-open-o"></i>@category.Name</a>
+
+															<a asp-controller="Advert" asp-action="Detail" asp-route-id="@category.Id">
+
+															<i class="fa fa-folder-open-o"></i>@category.Name</a>
 														</li>
 														<li class="list-inline-item">
-															<a href="#"><i class="fa fa-calendar"></i>26th December</a>
+															<a asp-controller="Advert" asp-action="Detail" asp-route-id="@category.Id">
+																
+																<i class="fa fa-calendar"></i>26th December</a>
 														</li>
 													</ul>
 													<p class="card-text">@advert.Description</p>
@@ -178,6 +186,11 @@
 							}
 						</div>
 					</div>
+
+
+
+
+
 					<div class="pagination justify-content-center">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
