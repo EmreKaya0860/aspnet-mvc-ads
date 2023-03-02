@@ -1,0 +1,89 @@
+﻿@model Advert
+
+<section class="ad-post bg-gray py-5">
+    <div class="container">
+        <form asp-action="AddListing" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Post Your ad start -->
+            <fieldset class="border border-gary p-4 mb-5">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>İlanını Yayınla</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="font-weight-bold pt-4 pb-1">İlan Başlığı:</h6>
+                        <input asp-for="Title" type="text" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There">
+                      
+                        
+                        <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
+                        <textarea asp-for="Description" class="border p-3 w-100" rows="7" placeholder="Write details about your product"></textarea>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="font-weight-bold pt-4 pb-1">Bir Kategori Seçin:</h6>
+                        <select name="CategoryId" id="inputGroupSelect" class="w-100">
+                           
+                            @foreach (var category in Model.Category)
+                            {
+                                <option value="@category.Id"> @category.Name </option>
+                            }
+
+                        </select>
+                        <div class="price">
+                            <h6 class="font-weight-bold pt-4 pb-1">Ürün Fİyatı(₺ TL):</h6>
+                            <div class="row px-3">
+                                <div class="col-lg-4 mr-lg-4 rounded bg-white my-2 ">
+                                    <input type="text" name="price" class="border-0 py-2 w-100 price" placeholder="Price"
+                                           id="price">
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="choose-file text-center my-4 py-4 rounded">
+                            <label for="file-upload">
+                                <span class="d-block font-weight-bold text-dark">Drop files anywhere to upload</span>
+                                <span class="d-block">or</span>
+                                <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
+                                <span class="d-block">Maximum upload file size: 500 KB</span>
+                                <input type="file" class="form-control-file d-none" id="file-upload" name="file">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Post Your ad end -->
+            <!-- seller-information start -->
+            <fieldset class="border p-4 my-5 seller-information bg-gray">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Satıcı Bilgisi</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="font-weight-bold pt-4 pb-1">Contact Name:</h6>
+                        <input type="text" placeholder="Contact name" class="border w-100 p-2">
+                        <h6 class="font-weight-bold pt-4 pb-1">Contact Number:</h6>
+                        <input type="text" placeholder="Contact Number" class="border w-100 p-2">
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="font-weight-bold pt-4 pb-1">Contact Name:</h6>
+                        <input type="email" [placeholder="name@yourmail.com](mailto:placeholder=%22name@yourmail.com)" class="border w-100 p-2">
+                        <h6 class="font-weight-bold pt-4 pb-1">Contact Name:</h6>
+                        <input type="text" placeholder="Your address" class="border w-100 p-2">
+                    </div>
+                </div>
+            </fieldset>
+         
+
+            <div class="checkbox d-inline-flex">
+                <input type="checkbox" id="terms-&-condition" class="mt-1">
+                <label for="terms-&-condition" class="ml-2">
+                    By click you must agree with our
+                    <span> <a class="text-success" href="terms-condition.html">Terms & Condition and Posting Rules.</a></span>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary d-block mt-2">İlanını Yayınla</button>
+        </form>
+    </div>
+
+    ```
+
+</section>
