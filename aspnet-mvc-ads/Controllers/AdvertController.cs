@@ -12,9 +12,6 @@ namespace aspnet_mvc_ads.Controllers
 		public readonly IAdvertService _advertService;
 
 
-
-
-
 		public AdvertController(ICategoryAdvertService categoryAdvertService, IService<Category> categoryService, IAdvertService advertService)
 		{
 			_categoryAdvertService = categoryAdvertService;
@@ -37,14 +34,10 @@ namespace aspnet_mvc_ads.Controllers
 
 		public async Task<IActionResult> DetailAsync(int id)
 		{
-
 			//var advert = await _categoryAdvertService.                 _service.GetProductByCategoriesBrandsAsync(id);
-
+			await _advertService.ClickUpdating(id);
 			var advert= await _advertService.FindAsync(id);
-
 			return View(advert);
-
-
 
 		}
 	}

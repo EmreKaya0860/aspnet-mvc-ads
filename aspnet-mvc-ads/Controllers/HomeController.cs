@@ -44,31 +44,31 @@ namespace aspnet_mvc_ads.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddListingAsync(Advert advert, IFormFile? AdvertImages)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if (AdvertImages is not null) advert.AdvertImages = await FileHelper.FileLoaderAsync(AdvertImages);
-                    await _AdvertService.AddAsync(advert);
-                    await _AdvertService.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch
-                {
-                    ModelState.AddModelError("", "Hata Oluştu!");
-                }
+        //[HttpPost]
+        //public async Task<IActionResult> AddListingAsync(Advert advert, IFormFile? AdvertImages)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            if (AdvertImages is not null) advert.AdvertImages = await FileHelper.FileLoaderAsync(AdvertImages);
+        //            await _AdvertService.AddAsync(advert);
+        //            await _AdvertService.SaveChangesAsync();
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //        catch
+        //        {
+        //            ModelState.AddModelError("", "Hata Oluştu!");
+        //        }
 
-                return View(advert);
-        }
+        //        return View(advert);
+        //}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

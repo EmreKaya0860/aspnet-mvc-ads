@@ -4,6 +4,7 @@ using App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230303105346__newhasdatas")]
+    partial class _newhasdatas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,9 +51,6 @@ namespace App.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClickCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -72,30 +72,17 @@ namespace App.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ClickCount = 0,
-                            Description = "Cep telefonu",
                             Title = "Iphone"
                         },
                         new
                         {
                             Id = 2,
-                            ClickCount = 0,
-                            Description = "Ahsaptan yapilmis koltuk takimi",
                             Title = "Koltuk Takimi"
                         },
                         new
                         {
                             Id = 3,
-                            ClickCount = 0,
-                            Description = "Kitap",
                             Title = "Roman"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClickCount = 0,
-                            Description = "Bilgisayar",
-                            Title = "Macbook Air"
                         });
                 });
 

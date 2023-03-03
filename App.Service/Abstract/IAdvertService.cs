@@ -9,7 +9,7 @@ namespace App.Service.Abstract
 {
 	public interface IAdvertService : IAdvertRepository
 	{
-
+		Task ClickUpdating(int id);
 
 	}
 }
