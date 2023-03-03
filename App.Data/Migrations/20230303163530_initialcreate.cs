@@ -5,7 +5,7 @@
 namespace App.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,7 @@ namespace App.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Context = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -48,7 +48,7 @@ namespace App.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Phone = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
@@ -64,6 +64,7 @@ namespace App.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClickCount = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -97,12 +98,37 @@ namespace App.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AdvertCategory",
+                columns: table => new
+                {
+                    AdvertsId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdvertCategory", x => new { x.AdvertsId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_AdvertCategory_Adverts_AdvertsId",
+                        column: x => x.AdvertsId,
+                        principalTable: "Adverts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AdvertCategory_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AdvertComments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AdvertId = table.Column<int>(type: "int", nullable: true),
+                    userID = table.Column<int>(type: "int", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -114,6 +140,12 @@ namespace App.Data.Migrations
                         column: x => x.AdvertId,
                         principalTable: "Adverts",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AdvertComments_Users_userID",
+                        column: x => x.userID,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,34 +167,20 @@ namespace App.Data.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "CategoryAdverts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
-                    AdvertId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoryAdverts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CategoryAdverts_Adverts_AdvertId",
-                        column: x => x.AdvertId,
-                        principalTable: "Adverts",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CategoryAdverts_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_AdvertCategory_CategoryId",
+                table: "AdvertCategory",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdvertComments_AdvertId",
                 table: "AdvertComments",
                 column: "AdvertId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdvertComments_userID",
+                table: "AdvertComments",
+                column: "userID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdvertImages_AdvertId",
@@ -175,16 +193,6 @@ namespace App.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryAdverts_AdvertId",
-                table: "CategoryAdverts",
-                column: "AdvertId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CategoryAdverts_CategoryId",
-                table: "CategoryAdverts",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Settings_UserId",
                 table: "Settings",
                 column: "UserId");
@@ -194,13 +202,13 @@ namespace App.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AdvertCategory");
+
+            migrationBuilder.DropTable(
                 name: "AdvertComments");
 
             migrationBuilder.DropTable(
                 name: "AdvertImages");
-
-            migrationBuilder.DropTable(
-                name: "CategoryAdverts");
 
             migrationBuilder.DropTable(
                 name: "Pages");
@@ -209,10 +217,10 @@ namespace App.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
-                name: "Adverts");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Adverts");
 
             migrationBuilder.DropTable(
                 name: "Users");

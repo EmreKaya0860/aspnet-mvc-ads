@@ -12,7 +12,7 @@ namespace App.Data.Entity
 
         [Display(Name = "İlan Açıklaması")]
         public string? Description { get; set; }
-        public int ClickCount { get; set; }
+        public int ClickCount { get; set; } = 0;
         public int? UserId { get; set; }
        
         public virtual User? User { get; set; }

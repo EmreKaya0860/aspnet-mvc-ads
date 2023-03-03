@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230226173334_deneme")]
-    partial class deneme
+    [Migration("20230303163530_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,27 @@ namespace App.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AdvertCategory", b =>
+                {
+                    b.Property<int>("AdvertsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AdvertsId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("AdvertCategory");
+                });
 
             modelBuilder.Entity("App.Data.Entity.Advert", b =>
                 {
@@ -32,6 +50,9 @@ namespace App.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClickCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -126,29 +147,6 @@ namespace App.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("App.Data.Entity.CategoryAdvert", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AdvertId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdvertId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("CategoryAdverts");
-                });
-
             modelBuilder.Entity("App.Data.Entity.Page", b =>
                 {
                     b.Property<int>("Id")
@@ -229,13 +227,29 @@ namespace App.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Phone")
-                        .HasMaxLength(20)
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("AdvertCategory", b =>
+                {
+                    b.HasOne("App.Data.Entity.Advert", null)
+                        .WithMany()
+                        .HasForeignKey("AdvertsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Data.Entity.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("App.Data.Entity.Advert", b =>
@@ -273,21 +287,6 @@ namespace App.Data.Migrations
                     b.Navigation("Advert");
                 });
 
-            modelBuilder.Entity("App.Data.Entity.CategoryAdvert", b =>
-                {
-                    b.HasOne("App.Data.Entity.Advert", "Advert")
-                        .WithMany("CategoryAdverts")
-                        .HasForeignKey("AdvertId");
-
-                    b.HasOne("App.Data.Entity.Category", "Category")
-                        .WithMany("CategoryAdverts")
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Advert");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("App.Data.Entity.Setting", b =>
                 {
                     b.HasOne("App.Data.Entity.User", "User")
@@ -302,13 +301,6 @@ namespace App.Data.Migrations
                     b.Navigation("AdvertComments");
 
                     b.Navigation("AdvertImages");
-
-                    b.Navigation("CategoryAdverts");
-                });
-
-            modelBuilder.Entity("App.Data.Entity.Category", b =>
-                {
-                    b.Navigation("CategoryAdverts");
                 });
 
             modelBuilder.Entity("App.Data.Entity.User", b =>

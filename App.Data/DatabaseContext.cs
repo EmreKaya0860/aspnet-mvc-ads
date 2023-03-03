@@ -27,69 +27,6 @@ namespace App.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-
-
-			modelBuilder.Entity<User>().HasData(
-
-				new User
-				{
-					Id = 1,
-					Name = "admin",
-					Email = "admin@blog.com",
-					Password = "123",
-					Phone = "23423231111",
-					Address = "samsun",
-				});
-			modelBuilder.Entity<Category>().HasData(
-
-				new Category
-				{
-					Id = 1,
-					Name = "Teknoloji",
-					Description = "Teknolojik Ürünler"
-				},
-				new Category
-				{
-					Id = 2,
-					Name = "Mobilya",
-					Description = "Ahşap Ürünler"
-				},
-				new Category
-				{
-					Id = 3,
-					Name = "Kitap",
-					Description = "Edebi Eserler"
-				}
-
-				);
-
-			modelBuilder.Entity<Advert>().HasData(
-
-				new Advert
-				{
-					Id = 1,
-					Title = "Iphone",
-					Description = "Cep telefonu"
-				},
-				new Advert
-				{
-					Id = 2,
-					Title = "Koltuk Takimi",
-					Description = "Ahsaptan yapilmis koltuk takimi"
-				},
-				new Advert
-				{
-					Id = 3,
-					Title = "Roman",
-					Description = "Kitap"
-				},
-				new Advert
-				{
-					Id = 4,
-					Title = "Macbook Air",
-					Description = "Bilgisayar"
-				}
-				);
 	
 
 
