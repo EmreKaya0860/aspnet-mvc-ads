@@ -38,12 +38,7 @@ namespace aspnet_mvc_ads.Controllers
         {
             return View(_CategoryService.GetAll());
         }
-        public IActionResult AddListing()
-        {
-
-            return View();
-        }
-
+ 
         //[HttpPost]
         //public async Task<IActionResult> AddListingAsync(Advert advert, IFormFile? AdvertImages)
         //{

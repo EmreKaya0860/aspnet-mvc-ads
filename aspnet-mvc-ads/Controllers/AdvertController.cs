@@ -29,7 +29,10 @@ namespace aspnet_mvc_ads.Controllers
 		}
 
 
-
+		public IActionResult AddListing()
+		{
+			return View();
+		}
 
 
 		public async Task<IActionResult> DetailAsync(int id)
