@@ -1,0 +1,49 @@
+﻿@inject IHttpContextAccessor context
+
+<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            <div class="sb-sidenav-menu-heading">Core</div>
+            <a class="nav-link" href="/Admin">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Ana Ekran
+            </a>
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                Marka Yönetimi
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="/Admin/Brands">Marka Listele</a>
+                    <a class="nav-link" href="/Admin/Brands/Create">Marka Ekle</a>
+                </nav>
+            </div>
+        
+            <a class="nav-link" href="/Admin/Carousel">
+                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                Slider Yönetimi
+            </a>
+            <a class="nav-link" href="/Admin/Categories">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Kategori Yönetimi
+            </a>
+            <a class="nav-link" href="/Admin/Products">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                Ürünler
+            </a>
+            <a class="nav-link" href="/Admin/Contacts">
+                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                İletişim Formları
+            </a>
+            <a class="nav-link" href="/Admin/Users">
+                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                Kullanıcılar
+            </a>
+        </div>
+    </div>
+    <div class="sb-sidenav-footer">
+        <div class="small">Hoşgeldin:</div>
+        @context.HttpContext.User.Identity.Name
+    </div>
+</nav>

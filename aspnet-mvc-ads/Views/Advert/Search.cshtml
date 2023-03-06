@@ -149,12 +149,12 @@
 											<div class="card">
 												<div class="thumb-content">
 													<!-- <div class="price">$200</div> -->
-													<a asp-controller="Advert" asp-action="Detail" asp-route-id="@category.Id">
+													<a asp-controller="Advert" asp-action="Detail" asp-route-id="@advert.Id">
 														<img class="card-img-top img-fluid" src="~/images/products/products-1.jpg" alt="Card image cap">
 													</a>
 												</div>
 												<div class="card-body">
-													<h4 class="card-title"><a href="single.html">@advert.Title</a></h4>
+													<h4 class="card-title"><a asp-controller="Advert" asp-action="Detail" asp-route-id="@advert.Id">@advert.Title</a></h4>
 													<ul class="list-inline product-meta">
 														<li class="list-inline-item">
 

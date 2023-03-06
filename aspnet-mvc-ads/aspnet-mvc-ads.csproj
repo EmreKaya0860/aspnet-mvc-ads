@@ -22,8 +22,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\startbootstrap-sb-admin-gh-pages\css\" />
+    <Folder Include="wwwroot\startbootstrap-sb-admin-gh-pages\js\" />
     <Folder Include="wwwroot\template\css\" />
     <Folder Include="wwwroot\template\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
