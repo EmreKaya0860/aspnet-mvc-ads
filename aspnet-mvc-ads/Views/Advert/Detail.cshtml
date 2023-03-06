@@ -4,7 +4,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <body class="body-wrapper">
 
 	<section class="page-search">
@@ -12,25 +12,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<!-- Advance Search -->
-					<div class="advance-search">
-						<form>
-							<div class="form-row">
-								<div class="form-group col-md-4">
-									<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">
-								</div>
-								<div class="form-group col-md-3">
-									<input type="text" class="form-control my-2 my-lg-0" id="inputCategory4" placeholder="Category">
-								</div>
-								<div class="form-group col-md-3">
-									<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">
-								</div>
-								<div class="form-group col-md-2">
+					@await Component.InvokeAsync("AdvanceSearch")
 
-									<button type="submit" class="btn btn-primary">Search Now</button>
-								</div>
-							</div>
-						</form>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -49,7 +32,7 @@
 						<div class="product-meta">
 
 							<ul class="list-inline">
-								<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href=""> USER Adı </a></li>
+								<li class="list-inline-item"><i class="fa fa-user-o"></i> tarafından <a href=""> Ayşe </a></li>
 
 								@foreach (var item in Model.Category)
 								{
@@ -121,20 +104,20 @@
 							<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
 								<li class="nav-item">
 									<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-									   aria-selected="true">Product Details</a>
+									   aria-selected="true">Ürün Detayları</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
-									   aria-selected="false">Specifications</a>
+									   aria-selected="false">Özellikler</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
-									   aria-selected="false">Reviews</a>
+									   aria-selected="false">Yorumlar</a>
 								</li>
 							</ul>
 							<div class="tab-content" id="pills-tabContent">
 								<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-									<h3 class="tab-title">Product Description</h3>
+									<h3 class="tab-title">Ürün Açıklaması</h3>
 									<p>
 										@Model.Description
 									</p>
@@ -154,46 +137,43 @@
 
 								</div>
 								<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-									<h3 class="tab-title">Product Specifications</h3>
+									<h3 class="tab-title">Ürün Özellikleri</h3>
 									<table class="table table-bordered product-table">
 										<tbody>
 											<tr>
-												<td>Seller Price</td>
+												<td>Satıcı Fiyatı</td>
 												<td>$450</td>
 											</tr>
 											<tr>
-												<td>Added</td>
+												<td> Eklenme Tarihi </td>
 												<td>26th December</td>
 											</tr>
 											<tr>
-												<td>State</td>
+												<td>Yer</td>
 												<td>Dhaka</td>
 											</tr>
 											<tr>
-												<td>Brand</td>
+												<td>Marka</td>
 												<td>Apple</td>
 											</tr>
 											<tr>
-												<td>Condition</td>
+												<td>Durum</td>
 												<td>Used</td>
 											</tr>
 											<tr>
 												<td>Model</td>
 												<td>2017</td>
 											</tr>
+											
 											<tr>
-												<td>State</td>
-												<td>Dhaka</td>
-											</tr>
-											<tr>
-												<td>Battery Life</td>
+												<td>Pil Ömrü</td>
 												<td>23</td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
 								<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-									<h3 class="tab-title">Product Review</h3>
+									<h3 class="tab-title">Ürün İncelemesi</h3>
 									<div class="product-review">
 										<div class="media">
 											<!-- Avater -->
@@ -221,7 +201,7 @@
 												</div>
 												<div class="name">
 												
-													<h5>@Model.User.Name</h5>
+													<h5>  Ayşe @* @Model.User.Name *@  </h5>
 												</div>
 												<div class="date">
 													<p>Mar 20, 2018</p>
@@ -249,7 +229,7 @@
 											</div>
 										</div>
 										<div class="review-submission">
-											<h3 class="tab-title">Submit your review</h3>
+											<h3 class="tab-title">Yorumlarınızı iletin..</h3>
 											<!-- Rate -->
 											<div class="rate">
 												<div class="starrr"></div>
@@ -257,16 +237,16 @@
 											<div class="review-submit">
 												<form action="#" class="row">
 													<div class="col-lg-6">
-														<input type="text" name="name" id="name" class="form-control" placeholder="Name">
+														<input type="text" name="name" id="name" class="form-control" placeholder="adınız...">
 													</div>
 													<div class="col-lg-6">
-														<input type="email" name="email" id="email" class="form-control" placeholder="Email">
+														<input type="email" name="email" id="email" class="form-control" placeholder="mail adresiniz...">
 													</div>
 													<div class="col-12">
-														<textarea name="review" id="review" rows="10" class="form-control" placeholder="Message"></textarea>
+														<textarea name="review" id="review" rows="10" class="form-control" placeholder="mesajınız..."></textarea>
 													</div>
 													<div class="col-12">
-														<button type="submit" class="btn btn-main">Sumbit</button>
+														<button type="submit" class="btn btn-main">Gönder</button>
 													</div>
 												</form>
 											</div>
@@ -280,7 +260,7 @@
 				<div class="col-md-4">
 					<div class="sidebar">
 						<div class="widget price text-center">
-							<h4>Price</h4>
+							<h4>Fiyat</h4>
 							<p>$230</p>
 						</div>
 						<!-- User Profile widget -->
@@ -288,17 +268,16 @@
 							<img class="rounded-circle img-fluid mb-5 px-5" src="~/images/user/user-thumb.jpg" alt="">
 							
 							
-							<h4><a href="">@Model.User.Name</a></h4>
+							<h4><a href=""> ayse@gmail.com  @* @Model.User.Name*@    </a></h4>
 
 
-							<p class="member-time">@Model.User.Email</p>
-							<a href="">See all ads</a>
+							
+							<a href="">Diğer ilanları incele</a>
 							<ul class="list-inline mt-20">
-								<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">Contact</a></li>
+								<li class="list-inline-item"><a href="" class="btn btn-contact d-inline-block  btn-primary px-lg-5 my-1 px-md-3">İletişim</a></li>
 								<li class="list-inline-item">
 									<a href="" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">
-										Make an
-										offer
+										Teklif öner
 									</a>
 								</li>
 							</ul>
@@ -313,32 +292,33 @@
 						<div class="widget rate">
 							<!-- Heading -->
 							<h5 class="widget-header text-center">
-								What would you rate
+								Bu ürüne kaç 
 								<br>
-								this product
+								puan verirsin?
 							</h5>
 							<!-- Rate -->
 							<div class="starrr"></div>
 						</div>
 						<!-- Safety tips widget -->
 						<div class="widget disclaimer">
-							<h5 class="widget-header">Safety Tips</h5>
+							<h5 class="widget-header">Güvenlik İpuçları</h5>
 							<ul>
-								<li>Meet seller at a public place</li>
-								<li>Check the item before you buy</li>
-								<li>Pay only after collecting the item</li>
-								<li>Pay only after collecting the item</li>
+								<li>Satıcıyla görüşme ayarla</li>
+								<li>Satın almadan önce ürünü kontrol et</li>
+								<li>Ürünü aldıktan sonra ödeme yapın</li>
+								<li>Yalnızca ürünü aldıktan sonra ödeme yapın</li>
 							</ul>
 						</div>
 						<!-- Coupon Widget -->
 						<div class="widget coupon text-center">
 							<!-- Coupon description -->
 							<p>
-								Have a great product to post ? Share it with
-								your fellow users.
+								Göndermek için harika bir ürününüz mü var?
+								şununla paylaş:
+								
 							</p>
 							<!-- Submii button -->
-							<a href="" class="btn btn-transparent-white">Submit Listing</a>
+							<a href="" class="btn btn-transparent-white">Listeye Ekle</a>
 						</div>
 
 					</div>
