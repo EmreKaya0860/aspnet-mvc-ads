@@ -34,6 +34,8 @@ namespace aspnet_mvc_ads.Controllers
 			ViewData["AllCategories"] = _CategoryService.GetAll();
 
 			return View(model);
+
+
 		}
 
 
