@@ -35,7 +35,6 @@ namespace aspnet_mvc_ads.Controllers
 
 			return View(model);
 
-
 		}
 
 
