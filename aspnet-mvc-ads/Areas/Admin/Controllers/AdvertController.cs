@@ -19,7 +19,6 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
 
         public  ActionResult Index()
         {
-            ViewBag.UserId= new SelectList( _serviceUser.GetAll(), "Id", "Name");
 
             var model = _service.GetAll();
             return View(model);
