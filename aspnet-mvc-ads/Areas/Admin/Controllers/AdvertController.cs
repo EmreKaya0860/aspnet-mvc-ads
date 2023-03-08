@@ -1,6 +1,7 @@
 ﻿using App.Data.Entity;
 using App.Service.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace aspnet_mvc_ads.Areas.Admin.Controllers
 {
@@ -8,14 +9,18 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
     public class AdvertController : Controller
     {
         private readonly IService<Advert> _service;
+        private readonly IService<User> _serviceUser;
 
-        public AdvertController(IService<Advert> service)
+        public AdvertController(IService<Advert> service, IService<User> uservice)
         {
             _service = service;
+            _serviceUser=uservice;
         }
 
-        public ActionResult Index()
+        public  ActionResult Index()
         {
+            ViewBag.UserId= new SelectList( _serviceUser.GetAll(), "Id", "Name");
+
             var model = _service.GetAll();
             return View(model);
         }
@@ -25,8 +30,9 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            ViewBag.UserId= new SelectList(await _serviceUser.GetAllAsync(), "Id", "Name");
             return View();
         }
 
