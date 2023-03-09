@@ -10,14 +10,17 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
     {
         private readonly IService<Advert> _service;
         private readonly IService<User> _serviceUser;
+        private readonly IService<AdvertComment> _serviceComment;
 
-        public AdvertController(IService<Advert> service, IService<User> uservice)
+
+        public AdvertController(IService<Advert> service, IService<User> uservice, IService<AdvertComment> serviceComment)
         {
             _service = service;
-            _serviceUser=uservice;
+            _serviceUser = uservice;
+            _serviceComment = serviceComment;
         }
 
-        public  ActionResult Index()
+        public ActionResult Index()
         {
 
             var model = _service.GetAll();
@@ -31,7 +34,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
 
         public async Task<ActionResult> Create()
         {
-            ViewBag.UserId= new SelectList(await _serviceUser.GetAllAsync(), "Id", "Name");
+            ViewBag.UserId = new SelectList(await _serviceUser.GetAllAsync(), "Id", "Name");
             return View();
         }
 
@@ -62,7 +65,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             return View(model);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditAsync(int id, Advert advert)
@@ -104,5 +107,37 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        public ActionResult CommentList()
+        {
+
+            var comments = _serviceComment.GetAll();
+            return View(comments);
+        }
+
+        public async Task<ActionResult> DeleteCommentAsync(int id)
+        {
+            var model = await _serviceComment.FindAsync(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteComment(int id, AdvertComment comment)
+        {
+            try
+            {
+                _serviceComment.Delete(comment);
+                _serviceComment.SaveChanges();
+                return RedirectToAction(nameof(CommentList));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
     }
 }

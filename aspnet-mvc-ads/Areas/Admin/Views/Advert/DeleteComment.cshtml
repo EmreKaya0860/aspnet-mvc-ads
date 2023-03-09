@@ -1,0 +1,45 @@
+﻿@model App.Data.Entity.AdvertComment
+
+@{
+    ViewData["Title"] = "Yorum Sil</";
+}
+
+<h1>Yorum Sil</h1>
+
+<h3>Bu yorumu silmek istediğinize emin misiniz?</h3>
+<div>
+    <h4>İlan Yorumları</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Advert)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Advert.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.user)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.user.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteComment">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="CommentList">Yorum Listesine Dön</a>
+    </form>
+</div>

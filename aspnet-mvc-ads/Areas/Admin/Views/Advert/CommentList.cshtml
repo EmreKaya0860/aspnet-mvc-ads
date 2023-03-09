@@ -1,0 +1,48 @@
+﻿@model IEnumerable<App.Data.Entity.AdvertComment>
+
+@{
+    ViewData["Title"] = "İlan Yorumları Yönetimi<";
+}
+
+<h1>İlan Yorumları Yönetimi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Advert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Advert.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                    <a asp-action="DeleteComment" asp-route-id="@item.Id">Yorumu Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
