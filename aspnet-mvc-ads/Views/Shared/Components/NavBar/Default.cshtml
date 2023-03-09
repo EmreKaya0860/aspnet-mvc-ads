@@ -55,9 +55,18 @@
 							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" asp-controller="Auth" asp-action="Login">Giriş</a>
-							</li>
+							@if (TempData["UserBilgisi"] is not null)
+							{
+								<li class="nav-item">
+									<a class="nav-link login-button" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
+								</li>
+							}
+							else
+							{
+								<li class="nav-item">
+									<a class="nav-link login-button" asp-controller="Auth" asp-action="Login">Giriş</a>
+								</li>
+							}
 							<li class="nav-item">
 								<a class="nav-link text-white add-button" asp-controller="Advert" asp-action="AddListing"><i class="fa fa-plus-circle"></i> İlan Yayınla</a>
 							</li>

@@ -13,10 +13,11 @@
             <div class="col-lg-5 col-md-8 align-item-center">
                 <div class="border">
                     <h3 class="bg-gray p-4">Giriş Yap</h3>
-                    <form action="#">
+                    <form asp-controller="Auth" asp-action="Login">
                         <fieldset class="p-4">
-                            <input type="text" placeholder="Eposta" class="border p-3 w-100 my-2">
-                            <input type="password" placeholder="Şifre" class="border p-3 w-100 my-2">
+                            @TempData["HataMesajı"]
+                            <input type="text" placeholder="Eposta" class="border p-3 w-100 my-2" name="email">
+                            <input type="password" placeholder="Şifre" class="border p-3 w-100 my-2" name="password">
                             <div class="loggedin-forgot">
                                     <input type="checkbox" id="keep-me-logged-in">
                                     <label for="keep-me-logged-in" class="pt-3 pb-2">Beni Hatırla</label>

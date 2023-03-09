@@ -1,6 +1,9 @@
 ﻿using App.Data.Entity;
 using App.Service.Abstract;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace aspnet_mvc_ads.Controllers
 {
@@ -32,11 +35,54 @@ namespace aspnet_mvc_ads.Controllers
                 ModelState.AddModelError("", "Bilgilerinizi kontrol ediniz");
                 return View(user);
             }
-            
+
         }
-        public IActionResult Login(string redirectUrl)
+
+        [Route("/Login")]
+        public IActionResult Login()
         {
             return View();
+        }
+
+        [Route("/Login")]
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            var user = _userService.Get(u => u.Email == email && u.Password == password);
+
+            
+            if (user is not null)
+            {
+                var userClaims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Role, "User"),
+                    new Claim("UserId", user.Id.ToString())
+                };
+				Response.Cookies.Append("userguid", Guid.NewGuid().ToString());
+
+
+				var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsPrincipal principal = new(userAuth);
+                await HttpContext.SignInAsync(principal);
+
+                
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                TempData["HataMesajı"] = "Bilgilerinizi kontrol edin!";
+            }
+
+            return View();
+        }
+
+        [Route("/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+			Response.Cookies.Delete("userguid");
+			return Redirect("/Login");
         }
         public IActionResult ForgotPassword()
         {
