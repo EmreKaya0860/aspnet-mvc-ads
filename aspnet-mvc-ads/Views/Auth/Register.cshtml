@@ -1,4 +1,5 @@
-﻿
+﻿@model User
+
 @{
     ViewData["Title"] = "Register";
    
@@ -11,14 +12,16 @@
             <div class="col-lg-5 col-md-8 align-item-center">
                 <div class="border border">
                     <h3 class="bg-gray p-4">Hemen Kayıt Ol</h3>
-                    <form action="#">
+                    <form asp-action="Register">
                         <fieldset class="p-4">
-                            <input type="email" placeholder="Email*" class="border p-3 w-100 my-2">
-                            <input type="password" placeholder="Parola*" class="border p-3 w-100 my-2">
-                            <input type="password" placeholder="Parolayı Onayla*" class="border p-3 w-100 my-2">
+                            <input type="text" placeholder="Ad" class="border p-3 w-100 my-2" asp-for="Name">
+                            <input type="email" placeholder="Eposta" class="border p-3 w-100 my-2" asp-for="Email">
+                            <input type="text" placeholder="Telefon" class="border p-3 w-100 my-2" asp-for="Phone">
+                            <input type="text" placeholder="Adres" class="border p-3 w-100 my-2" asp-for="Address">
+                            <input type="password" placeholder="Parola" class="border p-3 w-100 my-2" asp-for="Password">
                             <div class="loggedin-forgot d-inline-flex my-3">
                                 <input type="checkbox" id="registering" class="mt-1">
-                                <label for="registering" class="px-2">Kayıt olarak, <a class="text-primary font-weight-bold" href="terms-condition.html">Şart & Koşullar</a>'ı kabul ediyorsunuz.</label>
+                                <label for="registering" class="px-2">Kayıt olarak, <a class="text-primary font-weight-bold" asp-action="TermsCondition">Şart & Koşullar</a>'ı kabul ediyorsunuz.</label>
                             </div>
                             <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold">Kayıt Ol</button>
                         </fieldset>

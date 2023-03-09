@@ -1,0 +1,49 @@
+﻿@model Advert
+
+@{
+    ViewData["Title"] = "İlan Bilgilerini Düzenle";
+}
+
+<h1>İlan Bilgilerini Düzenle</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="@Model.UserId" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClickCount" class="control-label"></label>
+                <input asp-for="ClickCount" class="form-control" />
+                <span asp-validation-for="ClickCount" class="text-danger"></span>
+            </div>
+<<<<<<< HEAD
+           
+=======
+>>>>>>> 2ead6accb91658079ff4351b9b828cb774327d4c
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary my-1" asp-action="Index">Listeye Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
