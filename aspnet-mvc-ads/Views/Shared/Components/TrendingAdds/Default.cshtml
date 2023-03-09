@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Advert>
+﻿@model IEnumerable<Category>
 @{
 }
 
@@ -17,24 +17,28 @@
 			<div class="col-lg-12">
 				<div class="trending-ads-slide">
 
-
-					@foreach (var advert in Model)
+						@foreach (var category in Model)
 					{
+						foreach (var advert in category.Adverts)
+						{
 						<div class="col-sm-12 col-lg-4">
 						<!-- product card -->
 						<div class="product-item bg-light">
 							<div class="card">
 								<div class="thumb-content">
-									<!-- <div class="price">$200</div> -->
-									<a @*asp-controller="Advert" asp-action="Detail" asp-route-id="" *@ name="id">
-										<img class="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap">
+									
+											<a asp-controller="Advert" asp-action="Detail" asp-route-id="@advert.Id">
+												<img class="card-img-top img-fluid" src="~/images/products/products-1.jpg" alt="Card image cap">
 									</a>
 								</div>
 								<div class="card-body">
-									<h4 class="card-title"><a href="single.html">@advert.Title</a></h4>
+									<h4 class="card-title"><a asp-controller="Advert" asp-action="Detail" asp-route-id="@advert.Id">@advert.Title</a></h4>
 									<ul class="list-inline product-meta">
 										<li class="list-inline-item">
-											<a href="single.html"><i class="fa fa-folder-open-o"></i>Kategori Bilgisi Gelecek</a>
+										<a asp-controller="Advert" asp-action="Detail" asp-route-id="@category.Id">
+
+														<i class="fa fa-folder-open-o"></i>@category.Name
+													</a>
 										</li>
 										<li class="list-inline-item">
 											<a href="#"><i class="fa fa-calendar"></i>26th December</a>
@@ -58,8 +62,10 @@
 
 					</div>		
 					}
+					}
 
-								
+
+
 				</div>
 			</div>
 

@@ -20,7 +20,7 @@ namespace App.Service.Concrete
 		{
 			var advert = await context.Adverts.FirstOrDefaultAsync(c => c.Id == id);
 			advert.ClickCount++;
-			context.Adverts.Update(advert);
+			context.SaveChanges();
 		}
 
 	}

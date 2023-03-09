@@ -2,23 +2,28 @@
 using App.Service.Abstract;
 using App.Service.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
+using System.Linq.Expressions;
 
 namespace aspnet_mvc_ads.ViewComponents
 {
 	public class TrendingAdds : ViewComponent
 	{
-		private readonly IService<Advert> _AdvertService;
+		private readonly IService<Category> _service;
 
-		public TrendingAdds(IService<Advert> advertService)
+		public TrendingAdds(IService<Category> service)
 		{
-			_AdvertService = advertService;
+			_service = service;
 		}
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			var adverts = await _AdvertService.GetAllAsync();
+			var categories = await _service.GetAllAsync();
+			//var x = categories.Adverts.OrderByDescending(x => x.ClickCount).Take(5).ToList();
 
-			return View(adverts);
+
+
+            return View(categories);
 		}
 	}
 }
