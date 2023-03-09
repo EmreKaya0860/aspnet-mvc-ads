@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\images\AdvertImages\" />
     <Folder Include="wwwroot\startbootstrap-sb-admin-gh-pages\css\" />
     <Folder Include="wwwroot\startbootstrap-sb-admin-gh-pages\js\" />
     <Folder Include="wwwroot\template\css\" />

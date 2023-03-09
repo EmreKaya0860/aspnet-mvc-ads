@@ -1,5 +1,6 @@
 ﻿using App.Data.Entity;
 using App.Service.Abstract;
+using aspnet_mvc_ads.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,13 +12,15 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         private readonly IService<Advert> _service;
         private readonly IService<User> _serviceUser;
         private readonly IService<AdvertComment> _serviceComment;
+        private readonly IService<AdvertImage> _serviceImage;
 
 
-        public AdvertController(IService<Advert> service, IService<User> uservice, IService<AdvertComment> serviceComment)
+        public AdvertController(IService<Advert> service, IService<User> uservice, IService<AdvertComment> serviceComment, IService<AdvertImage> serviceImage)
         {
             _service = service;
             _serviceUser = uservice;
             _serviceComment = serviceComment;
+            _serviceImage = serviceImage;
         }
 
         public ActionResult Index()
@@ -64,7 +67,6 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             var model = await _service.FindAsync(id);
             return View(model);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -138,6 +140,76 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         }
 
 
+        public ActionResult ImageList()
+        {
+
+            var model = _serviceImage.GetAll();
+            return View(model);
+        }
+        public async Task<ActionResult> CreateImageAsync()
+        {
+            ViewBag.AdvertId = new SelectList(await _service.GetAllAsync(), "Id", "Title"); 
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateImageAsync(AdvertImage advertimage, IFormFile? ImagePath)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (ImagePath is not null) advertimage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
+                    await _serviceImage.AddAsync(advertimage);
+                    await _serviceImage.SaveChangesAsync();
+                    return RedirectToAction(nameof(ImageList));
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Hata Oluştu!");
+                }
+            }
+            ViewBag.AdvertId = new SelectList(await _service.GetAllAsync(), "Id", "Name"); 
+            return View(advertimage);
+        }
+
+        public async Task<ActionResult> EditImageAsync(int id)
+        {
+            var model = await _serviceImage.FindAsync(id);
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditImageAsync(int id, AdvertImage image)
+        {
+          
+            return View(image);
+        }
+
+        public async Task<ActionResult> DeleteImageAsync(int id)
+        {
+            var model = await _serviceImage.FindAsync(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteImage(int id, AdvertImage image)
+        {
+            try
+            {
+                _serviceImage.Delete(image);
+                _serviceImage.SaveChanges();
+                return RedirectToAction(nameof(ImageList));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
     }
 }
