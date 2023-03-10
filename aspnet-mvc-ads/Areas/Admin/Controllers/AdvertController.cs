@@ -117,6 +117,15 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             return View(comments);
         }
 
+
+
+
+
+
+
+
+
+
         public async Task<ActionResult> DeleteCommentAsync(int id)
         {
             var model = await _serviceComment.FindAsync(id);

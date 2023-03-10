@@ -6,9 +6,15 @@
 
 <h1>İlan Resim Yönetimi</h1>
 
+
+
 <p>
-    <a asp-action="CreateImage">Yeni Resim Ekle</a>
+    <a asp-action="CreateImage" >Yeni Resim Ekle</a>
 </p>
+
+
+
+
 <table class="table">
     <thead>
         <tr>
@@ -33,6 +39,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+
                 <a asp-action="DeleteImage" asp-route-id="@item.Id">Sil</a>
             </td>
         </tr>
