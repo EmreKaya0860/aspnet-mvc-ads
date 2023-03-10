@@ -17,7 +17,8 @@ namespace App.Data
 		public DbSet<Page> Pages { get; set; }
 		public DbSet<Setting> Settings { get; set; }
 		public DbSet<User> Users { get; set; }
-		
+		public DbSet<PasswordCode> PasswordCodes { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseLazyLoadingProxies();
