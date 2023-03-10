@@ -13,14 +13,24 @@ namespace App.Service.Concrete
 {
     public class AdvertService : AdvertRepository, IAdvertService
     {
-        public AdvertService(DatabaseContext _context) : base(_context)
+
+        private readonly ICategoryService _categoryService;
+
+        public AdvertService(DatabaseContext _context, ICategoryService categoryService) : base(_context)
         {
+            _categoryService = categoryService;
         }
 
         public async Task ClickUpdating(int id)
         {
-            var advert = await context.Adverts.FirstOrDefaultAsync(c => c.Id == id);
+            var advert = await context.Adverts.Include(x => x.Category).FirstOrDefaultAsync(c => c.Id == id);
             advert.ClickCount++;
+            foreach (var item in advert.Category)
+            {
+                item.ClickCount++;
+                //await _categoryService.CategoryClickCounter(item.Id);
+            }
+
             context.SaveChanges();
         }
 
