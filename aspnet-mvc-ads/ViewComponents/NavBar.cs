@@ -15,7 +15,15 @@ namespace aspnet_mvc_ads.ViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			return View(await _CategoryService.GetAllAsync());
+            if (Request.Cookies["userguid"] is not null)
+            {
+                TempData["UserBilgisi"] = Request.Cookies["userguid"];
+            }
+            else
+            {
+                TempData["UserBilgisi"] = null;
+            }
+            return View(await _CategoryService.GetAllAsync());
 		}
 	}
 }

@@ -80,7 +80,7 @@ namespace aspnet_mvc_ads.Controllers
             return RedirectToAction("Index", "Home");
 		}
 
-        public async Task<IActionResult> DetailAsync(int id)
+        public async Task<IActionResult> Detail(int id)
 		{
 			//var advert = await _categoryAdvertService.                 _service.GetProductByCategoriesBrandsAsync(id);
 			await _advertService.ClickUpdating(id);

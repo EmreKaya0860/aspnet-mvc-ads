@@ -3,6 +3,8 @@ using App.Data.Abstract;
 using App.Data.Concrete;
 using App.Service.Abstract;
 using App.Service.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +17,22 @@ builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
 builder.Services.AddTransient<ICategoryAdvertService, CategoryAdvertService>();
 builder.Services.AddTransient<IAdvertListingService, AdvertListingService>();
-
 builder.Services.AddTransient<IAdvertService, AdvertService>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie( options =>
+{
+    options.LoginPath = "/Login";
+    options.LogoutPath = "/Logout";
+    options.Cookie.Name = "Administrator";
+    options.Cookie.MaxAge = TimeSpan.FromDays(1);
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+    options.AddPolicy("UserPolicy", policy => policy.RequireClaim(ClaimTypes.Role, "User"));
+
+});
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -41,8 +57,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 
 
 app.MapControllerRoute(
