@@ -10,20 +10,19 @@ namespace aspnet_mvc_ads.ViewComponents
 	public class TrendingAdds : ViewComponent
 	{
 		private readonly IService<Category> _service;
+		private readonly IAdvertService _advertService;
 
-		public TrendingAdds(IService<Category> service)
+		public TrendingAdds(IService<Category> service, IAdvertService advertService)
+        {
+            _service = service;
+            _advertService = advertService;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
 		{
-			_service = service;
-		}
+			var adverts = await _advertService.GetMostViewedAdverts();
 
-		public async Task<IViewComponentResult> InvokeAsync()
-		{
-			var categories = await _service.GetAllAsync();
-			//var x = categories.Adverts.OrderByDescending(x => x.ClickCount).Take(5).ToList();
-
-
-
-            return View(categories);
+            return View(adverts);
 		}
 	}
 }
