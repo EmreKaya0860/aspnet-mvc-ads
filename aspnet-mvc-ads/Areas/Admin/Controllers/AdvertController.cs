@@ -140,7 +140,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         }
 
 
-        public async Task<ActionResult> ImageListAsync(int id)
+        public ActionResult ImageList()
         {
 
            
@@ -152,10 +152,9 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             ViewBag.AdvertId = new SelectList(await _service.GetAllAsync(), "Id", "Title"); 
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateImageAsync(AdvertImage advertimage, IFormFile? ImagePath)
+        public async Task<ActionResult> CreateImageAsync(IFormFile? ImagePath)
         {
             if (ModelState.IsValid)
             {
@@ -164,7 +163,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
                     if (ImagePath is not null) advertimage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
                     await _serviceImage.AddAsync(advertimage);
                     await _serviceImage.SaveChangesAsync();
-                    return RedirectToAction(nameof(ImageListAsync));
+                    return RedirectToAction(nameof(ImageList));
                 }
                 catch
                 {
@@ -172,7 +171,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
                 }
             }
             ViewBag.AdvertId = new SelectList(await _service.GetAllAsync(), "Id", "Name"); 
-            return View(advertimage);
+            return View();
         }
 
         public async Task<ActionResult> EditImageAsync(int id)
@@ -180,8 +179,6 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             var model = await _serviceImage.FindAsync(id);
             return View(model);
         }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditImageAsync(int id, AdvertImage image)

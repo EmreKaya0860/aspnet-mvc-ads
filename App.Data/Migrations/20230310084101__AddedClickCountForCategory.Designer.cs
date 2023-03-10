@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230303142145_deneme45")]
-    partial class deneme45
+    [Migration("20230310084101__AddedClickCountForCategory")]
+    partial class _AddedClickCountForCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,36 +70,6 @@ namespace App.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Adverts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClickCount = 0,
-                            Description = "Cep telefonu",
-                            Title = "Iphone"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClickCount = 0,
-                            Description = "Ahsaptan yapilmis koltuk takimi",
-                            Title = "Koltuk Takimi"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClickCount = 0,
-                            Description = "Kitap",
-                            Title = "Roman"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClickCount = 0,
-                            Description = "Bilgisayar",
-                            Title = "Macbook Air"
-                        });
                 });
 
             modelBuilder.Entity("App.Data.Entity.AdvertComment", b =>
@@ -162,6 +132,9 @@ namespace App.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ClickCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -175,26 +148,6 @@ namespace App.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Teknolojik Ürünler",
-                            Name = "Teknoloji"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Ahşap Ürünler",
-                            Name = "Mobilya"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Edebi Eserler",
-                            Name = "Kitap"
-                        });
                 });
 
             modelBuilder.Entity("App.Data.Entity.Page", b =>
@@ -285,17 +238,6 @@ namespace App.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "samsun",
-                            Email = "admin@blog.com",
-                            Name = "admin",
-                            Password = "123",
-                            Phone = "23423231111"
-                        });
                 });
 
             modelBuilder.Entity("AdvertCategory", b =>

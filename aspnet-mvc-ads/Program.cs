@@ -18,6 +18,7 @@ builder.Services.AddTransient(typeof(IService<>), typeof(Service<>));
 builder.Services.AddTransient<ICategoryAdvertService, CategoryAdvertService>();
 builder.Services.AddTransient<IAdvertListingService, AdvertListingService>();
 builder.Services.AddTransient<IAdvertService, AdvertService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie( options =>
 {
