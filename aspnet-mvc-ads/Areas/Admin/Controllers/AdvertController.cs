@@ -149,7 +149,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         }
 
 
-        public async Task<ActionResult> ImageListAsync(int id)
+        public async Task<ActionResult> ImageList(int id)
         {
 
            
@@ -163,22 +163,22 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateImageAsync(IFormFile? ImagePath)
+        public async Task<ActionResult> CreateImageAsync(int id, AdvertImage advertImage,IFormFile? ImagePath)
         {
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            if (ImagePath is not null) advertimage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
-        //            await _serviceImage.AddAsync(advertimage);
-        //            await _serviceImage.SaveChangesAsync();
-        //            return RedirectToAction(nameof(ImageListAsync));
-        //        }
-        //        catch
-        //        {
-        //            ModelState.AddModelError("", "Hata Oluştu!");
-        //        }
-        //    }
+          if (ModelState.IsValid)
+          {
+              try
+              {
+                   if (ImagePath is not null) advertImage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
+                   await _serviceImage.AddAsync(advertImage);
+                   await _serviceImage.SaveChangesAsync();
+                   return RedirectToAction(nameof(ImageList));
+               }
+                catch
+               {
+                   ModelState.AddModelError("", "Hata Oluştu!");
+               }
+           }
             ViewBag.AdvertId = new SelectList(await _service.GetAllAsync(), "Id", "Name"); 
             return View();
         }
@@ -210,7 +210,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             {
                 _serviceImage.Delete(image);
                 _serviceImage.SaveChanges();
-                return RedirectToAction(nameof(ImageListAsync));
+                return RedirectToAction(nameof(ImageList));
             }
             catch
             {
