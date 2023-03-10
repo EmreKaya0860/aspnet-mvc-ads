@@ -28,7 +28,7 @@
 						<div class="product-meta">
 
 							<ul class="list-inline">
-								<li class="list-inline-item"><i class="fa fa-user-o"></i> tarafından <a href=""> Ayşe </a></li>
+								<li class="list-inline-item"><i class="fa fa-user-o"></i> tarafından <a href=""> @Model.User.Name </a></li>
 
 								@foreach (var item in Model.Category)
 								{
@@ -183,7 +183,7 @@
 												</div>
 												<div class="name">
 												
-													<h5>  Ayşe @* @Model.User.Name *@  </h5>
+													<h5>  Ayşe  @Model.User.Name  </h5>
 												</div>
 												<div class="date">
 													<p>Mar 20, 2018</p>
@@ -250,7 +250,7 @@
 							<img class="rounded-circle img-fluid mb-5 px-5" src="~/images/user/user-thumb.jpg" alt="">
 							
 							
-							<h4><a href=""> ayse@gmail.com  @* @Model.User.Name*@    </a></h4>
+							<h4><a href="">   @Model.User.Name  </a></h4>
 
 
 							
