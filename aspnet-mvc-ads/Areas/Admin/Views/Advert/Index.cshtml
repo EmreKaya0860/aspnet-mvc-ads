@@ -45,7 +45,17 @@
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
 
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>   |
+
+                    <a class="btn btn-outline-success" asp-action="CommentList" asp-route-id="@item.Id">Yorumlar</a> |
+
+                    <a class="btn btn-outline-danger" asp-action="ImageList" asp-route-id="@item.Id">Resimler</a> 
+
+
+
+
+
+
                 </td>
         </tr>
 }

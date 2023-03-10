@@ -110,10 +110,10 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult CommentList()
+        public async Task<ActionResult> CommentListAsync(int id)
         {
 
-            var comments = _serviceComment.GetAll();
+            var comments =await  _serviceComment.GetAllAsync(a=> a.AdvertId == id);
             return View(comments);
         }
 
@@ -131,7 +131,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             {
                 _serviceComment.Delete(comment);
                 _serviceComment.SaveChanges();
-                return RedirectToAction(nameof(CommentList));
+                return RedirectToAction(nameof(CommentListAsync));
             }
             catch
             {
@@ -140,10 +140,11 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         }
 
 
-        public ActionResult ImageList()
+        public async Task<ActionResult> ImageListAsync(int id)
         {
 
-            var model = _serviceImage.GetAll();
+           
+            var model = await _serviceImage.GetAllAsync(a=> a.AdvertId==id);
             return View(model);
         }
         public async Task<ActionResult> CreateImageAsync()
@@ -163,7 +164,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
                     if (ImagePath is not null) advertimage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
                     await _serviceImage.AddAsync(advertimage);
                     await _serviceImage.SaveChangesAsync();
-                    return RedirectToAction(nameof(ImageList));
+                    return RedirectToAction(nameof(ImageListAsync));
                 }
                 catch
                 {
@@ -203,7 +204,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
             {
                 _serviceImage.Delete(image);
                 _serviceImage.SaveChanges();
-                return RedirectToAction(nameof(ImageList));
+                return RedirectToAction(nameof(ImageListAsync));
             }
             catch
             {
