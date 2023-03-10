@@ -140,7 +140,7 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         }
 
 
-        public ActionResult ImageList()
+        public async Task<ActionResult> ImageListAsync(int id)
         {
 
            
@@ -156,20 +156,20 @@ namespace aspnet_mvc_ads.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateImageAsync(IFormFile? ImagePath)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    if (ImagePath is not null) advertimage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
-                    await _serviceImage.AddAsync(advertimage);
-                    await _serviceImage.SaveChangesAsync();
-                    return RedirectToAction(nameof(ImageList));
-                }
-                catch
-                {
-                    ModelState.AddModelError("", "Hata Oluştu!");
-                }
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            if (ImagePath is not null) advertimage.ImagePath = await FileHelper.FileLoaderAsync(ImagePath, "/wwwroot/images/AdvertImages/");
+        //            await _serviceImage.AddAsync(advertimage);
+        //            await _serviceImage.SaveChangesAsync();
+        //            return RedirectToAction(nameof(ImageListAsync));
+        //        }
+        //        catch
+        //        {
+        //            ModelState.AddModelError("", "Hata Oluştu!");
+        //        }
+        //    }
             ViewBag.AdvertId = new SelectList(await _service.GetAllAsync(), "Id", "Name"); 
             return View();
         }
