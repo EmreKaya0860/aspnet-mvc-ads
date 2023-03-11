@@ -43,44 +43,44 @@ namespace aspnet_mvc_ads.Controllers
 		public IActionResult AddListing()
 		{
 			ViewData["Categories"] = _CategoryService.GetAll();
-			return View();
+            ViewData["userName"] = Request.Cookies["userName"];
+            ViewData["userPhone"] = Request.Cookies["userPhone"];
+            ViewData["userEmail"] = Request.Cookies["userEmail"];
+            ViewData["userAdress"] = Request.Cookies["userAdress"];
+            return View();
 		}
 
 
 		[HttpPost]
-		public async Task<IActionResult> AddListing(AddListingViewModel addListingView, List<IFormFile>? Images)
-		{
+        public async Task<IActionResult> AddListing(int categoryId, AddListingViewModel addListingView, List<IFormFile>? Images)
+        {
             ViewData["Categories"] = _CategoryService.GetAll();
+            ViewData["userName"] = Request.Cookies["userName"];
+            ViewData["userPhone"] = Request.Cookies["userPhone"];
+            ViewData["userEmail"] = Request.Cookies["userEmail"];
+            ViewData["userAdress"] = Request.Cookies["userAdress"];
 
 
-            var user = _UserService.Get(a => a.Email == addListingView.User.Email);
-			var category = _CategoryService.GetAll(c => c.Id == addListingView.Category.Id);
+            var user = _UserService.Get(a => a.Email == Request.Cookies["userEmail"]);
+            var category = _CategoryService.GetAll(c => c.Id == categoryId);
 
-			//Image ekleme denemeleri
-   //         List<string> ImagePaths = new List<string>();
+            List<AdvertImage> advertImages = new List<AdvertImage>();
 
-   //         foreach (IFormFile item in Images)
-			//{
-			//	ImagePaths.Add(item.FileName);
-			//	FileHelper.FileLoaderAsync(item, filePath: "/wwwroot/images/adverts");
+            foreach (IFormFile item in Images)
+            {
+                AdvertImage advertImage = new AdvertImage();
 
-   //         }
+                advertImage.ImagePath = await FileHelper.FileLoaderAsync(item, filePath: "/wwwroot/images/");
 
-			//List<AdvertImage> advertImages = new List<AdvertImage>();
+                advertImages.Add(advertImage);
 
-			//foreach (var image in ImagePaths)
-			//{
-			//	var advertImage = new AdvertImage();
-			//	advertImage.Advert = addListingView.Advert;
-			//	advertImage.ImagePath = image;
-			//	advertImages.Add(advertImage);
-			//}
+            }
 
-            _AdvertListingService.AddList(user, addListingView.Advert, addListingView.AdvertImages, category);
+            _AdvertListingService.AddList(user, addListingView.Advert, advertImages, category);
 
 
             return RedirectToAction("Index", "Home");
-		}
+        }
 
         public async Task<IActionResult> Detail(int id)
 		{
@@ -100,7 +100,7 @@ namespace aspnet_mvc_ads.Controllers
         {
             _serviceComment.Add(advertcommet);
             _serviceComment.SaveChanges();
-            return Redirect("/Home");
+            return RedirectToAction("Detail");
 
         }
 

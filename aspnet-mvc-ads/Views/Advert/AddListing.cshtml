@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Bir Kategori Seçin:</h6>
-                            <select asp-for="@Model.Category.Id" id="inputGroupSelect" class="w-100">
+                            <select name="categoryId" id="inputGroupSelect" class="w-100">
                                 <option value="1">Bir Kategori Seçin:</option>
                                 @foreach (var item in ViewData["Categories"] as IEnumerable<Category>)
                                 {
@@ -56,20 +56,19 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Kullanıcının İsmi:</h6>
-                            <input asp-for="@Model.User.Name" type="text" placeholder="Kullanıcının İsmi" class="border w-100 p-2">
+                            <input type="text" placeholder="Kullanıcının İsmi" class="border w-100 p-2" value="@ViewData["userName"]">
                             <h6 class="font-weight-bold pt-4 pb-1">Kullanıcının Numarası:</h6>
-                            <input asp-for="@Model.User.Phone" type="text" placeholder="Kullanıcının Numarası" class="border w-100 p-2">
+                            <input type="text" placeholder="Kullanıcının Numarası" class="border w-100 p-2" value="@ViewData["userPhone"]">
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Kullanıcının Email Adresi:</h6>
-                            <input asp-for="@Model.User.Email" type="email" placeholder="name@yourmail.com" class="border w-100 p-2">
+                            <input type="email" placeholder="name@yourmail.com" class="border w-100 p-2" value="@ViewData["userEmail"]">
                             <h6 class="font-weight-bold pt-4 pb-1">Kullanıcının Adresi:</h6>
-                            <input asp-for="@Model.User.Address" type="text" placeholder="Kullanıcının Adresi" class="border w-100 p-2">
+                            <input type="text" placeholder="Kullanıcının Adresi" class="border w-100 p-2" value="@ViewData["userAdress"]">
                         </div>
                     </div>
                 </fieldset>
                 <!-- seller-information end-->
-
                 <!-- submit button -->
                 <div class="checkbox d-inline-flex">
                     <input type="checkbox" id="terms-&-condition" class="mt-1">

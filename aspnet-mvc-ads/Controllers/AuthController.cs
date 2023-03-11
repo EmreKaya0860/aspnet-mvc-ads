@@ -60,10 +60,14 @@ namespace aspnet_mvc_ads.Controllers
                     new Claim("UserId", user.Id.ToString())
                 };
 				Response.Cookies.Append("userguid", Guid.NewGuid().ToString());
-                
+                Response.Cookies.Append("userName", user.Name);
+                Response.Cookies.Append("userPhone", user.Phone);
+                Response.Cookies.Append("userEmail", user.Email);
+                Response.Cookies.Append("userAdress", user.Address);
 
 
-				var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new(userAuth);
                 await HttpContext.SignInAsync(principal);
 
@@ -83,7 +87,11 @@ namespace aspnet_mvc_ads.Controllers
         {
             await HttpContext.SignOutAsync();
 			Response.Cookies.Delete("userguid");
-			return Redirect("/Login");
+            Response.Cookies.Delete("userName");
+            Response.Cookies.Delete("userPhone");
+            Response.Cookies.Delete("userEmail");
+            Response.Cookies.Delete("userAdress");
+            return Redirect("/Login");
         }
         public IActionResult ForgotPassword()
         {
