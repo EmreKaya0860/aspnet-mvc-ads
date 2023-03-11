@@ -1,0 +1,46 @@
+﻿
+@model AdvertComment
+@{
+
+    
+
+}
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form  asp-controller="Advert" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AdvertId" class="control-label"></label>
+
+
+                <input asp-for="AdvertId" class="form-control" asp-items="ViewBag.AdvertId" />
+
+              @*  <select asp-for="AdvertId" class="form-control" asp-items="ViewBag.AdvertId"></select>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="userID" class="control-label"></label>
+                <input asp-for="userID" class="form-control" asp-items="TempData["UserBilgisi"]" />
+                @*<select asp-for="userID" class="form-control" asp-items="ViewBag.userID"></select>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label"></label>
+                <input asp-for="Comment" class="form-control" />
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

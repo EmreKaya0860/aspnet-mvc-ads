@@ -16,15 +16,17 @@ namespace aspnet_mvc_ads.Controllers
 		public readonly IAdvertService _advertService;
 		public readonly IService<User> _UserService;
 		public readonly IAdvertListingService _AdvertListingService;
+        private readonly IService<AdvertComment> _serviceComment;
 
 
-        public AdvertController(ICategoryAdvertService categoryAdvertService, IService<Category> categoryService, IAdvertService advertService, IService<User> userService, IAdvertListingService advertListingService)
+        public AdvertController(ICategoryAdvertService categoryAdvertService, IService<Category> categoryService, IAdvertService advertService, IService<User> userService, IAdvertListingService advertListingService, IService<AdvertComment> serviceComment)
         {
             _categoryAdvertService = categoryAdvertService;
             _CategoryService = categoryService;
             _advertService = advertService;
             _UserService = userService;
             _AdvertListingService = advertListingService;
+            _serviceComment = serviceComment;
         }
 
         public async Task<IActionResult> Search(int CategoryId, string query = "")
@@ -88,5 +90,20 @@ namespace aspnet_mvc_ads.Controllers
 			return View(advert);
 
 		}
-	}
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(AdvertComment advertcommet)
+        {
+            _serviceComment.Add(advertcommet);
+            _serviceComment.SaveChanges();
+            return Redirect("/Home");
+
+        }
+
+
+    }
 }

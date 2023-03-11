@@ -60,6 +60,7 @@ namespace aspnet_mvc_ads.Controllers
                     new Claim("UserId", user.Id.ToString())
                 };
 				Response.Cookies.Append("userguid", Guid.NewGuid().ToString());
+                
 
 
 				var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
