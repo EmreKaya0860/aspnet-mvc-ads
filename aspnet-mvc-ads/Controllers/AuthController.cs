@@ -137,8 +137,8 @@ namespace aspnet_mvc_ads.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdatePasswordAsync([Bind("NewPassword")] ResetPasswordModel model)
         {
-            string token = TempData["token"].ToString;
-            string userId = TempData["userId"].ToString;
+            string token = TempData["token"].ToString();
+            string userId = TempData["userId"].ToString();
 
             var user = await _userManager.FindByIdAsync(userId);
 
