@@ -1,8 +1,6 @@
 ﻿using App.Data.Entity;
 using App.Service.Abstract;
-using App.Service.Concrete;
 using aspnet_mvc_ads.Models;
-using aspnet_mvc_ads.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -19,8 +17,7 @@ namespace aspnet_mvc_ads.Controllers
 
 		public IActionResult Index()
         {
-            
-           
+                       
             return View();
         }
 
