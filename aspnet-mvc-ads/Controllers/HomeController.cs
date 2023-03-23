@@ -38,8 +38,32 @@ namespace aspnet_mvc_ads.Controllers
             return View(_CategoryService.GetAll());
         }
 
+        public IActionResult ErrorPage()
+        {
+            return View();
+        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Package()
+        {
+            return View();
+        }
+
+        public IActionResult Store()
+        {
+            return View();
+        }
+
+		public IActionResult Post()
+		{
+			return View();
+		}
+
+        public IActionResult Blog()
+        {
+            return View();
+        }
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
         public IActionResult Error()
         {

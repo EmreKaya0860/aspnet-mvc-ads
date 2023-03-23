@@ -13,12 +13,12 @@ namespace aspnet_mvc_ads.Controllers
     public class AuthController : Controller
     {
         private readonly IService<User> _userService;
-        readonly UserManager<User> _userManager;
+        //readonly UserManager<User> _userManager;
 
-        public AuthController(IService<User> userService, UserManager<User> userManager)
+        public AuthController(IService<User> userService)
         {
             _userService = userService;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         public IActionResult Register()
@@ -81,6 +81,7 @@ namespace aspnet_mvc_ads.Controllers
             }
             else
             {
+                Response.Cookies.Append("userPhone", "");
                 TempData["HataMesajı"] = "Bilgilerinizi kontrol edin!";
             }
 
@@ -104,63 +105,63 @@ namespace aspnet_mvc_ads.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ResetPasswordAsync(ResetPasswordModel model)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+        //[HttpPost]
+        //public async Task<IActionResult> ResetPasswordAsync(ResetPasswordModel model)
+        //{
+        //    var user = await _userManager.FindByEmailAsync(model.Email);
 
-            if (user != null)
-            {
-                string resettoken = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //    if (user != null)
+        //    {
+        //        string resettoken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-                string passwordresetlink = Url.Action("UpdatePassword", "User", new { userId = user.Id, token = resettoken },HttpContext.Request.Scheme);
+        //        string passwordresetlink = Url.Action("UpdatePassword", "User", new { userId = user.Id, token = resettoken },HttpContext.Request.Scheme);
 
-                Utils.ResetPassword.PasswordSendMail(passwordresetlink);
-                ViewBag.State = true;
-            }
+        //        Utils.ResetPassword.PasswordSendMail(passwordresetlink);
+        //        ViewBag.State = true;
+        //    }
 
-            else
-            {
-                ViewBag.State = false;
-            }
-            return View();
-        }
+        //    else
+        //    {
+        //        ViewBag.State = false;
+        //    }
+        //    return View();
+        //}
 
 
-        public IActionResult UpdatePassword(string userId,string token)
-        {
-            TempData["userId"] = userId;
-            TempData["token"] = token;
+        //public IActionResult UpdatePassword(string userId,string token)
+        //{
+        //    TempData["userId"] = userId;
+        //    TempData["token"] = token;
 
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> UpdatePasswordAsync([Bind("NewPassword")] ResetPasswordModel model)
-        {
-            string token = TempData["token"].ToString();
-            string userId = TempData["userId"].ToString();
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> UpdatePasswordAsync([Bind("NewPassword")] ResetPasswordModel model)
+        //{
+        //    string token = TempData["token"].ToString();
+        //    string userId = TempData["userId"].ToString();
 
-            var user = await _userManager.FindByIdAsync(userId);
+        //    var user = await _userManager.FindByIdAsync(userId);
 
-            if (user != null)
-            {
-                IdentityResult result = await _userManager.ResetPasswordAsync(user, token, model.NewPassword);
+        //    if (user != null)
+        //    {
+        //        IdentityResult result = await _userManager.ResetPasswordAsync(user, token, model.NewPassword);
 
-                if (result.Succeeded)
-                {
-                    await _userManager.UpdateSecurityStampAsync(user);
-                    TempData["Success"] = "Başarıyla güncellenmiştir";
+        //        if (result.Succeeded)
+        //        {
+        //            await _userManager.UpdateSecurityStampAsync(user);
+        //            TempData["Success"] = "Başarıyla güncellenmiştir";
                     
-                }
-            }
+        //        }
+        //    }
 
-            else
-            {
-                ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı");
-            }
+        //    else
+        //    {
+        //        ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı");
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
     }
 }

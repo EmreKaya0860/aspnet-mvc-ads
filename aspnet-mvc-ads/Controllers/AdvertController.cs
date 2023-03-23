@@ -17,9 +17,10 @@ namespace aspnet_mvc_ads.Controllers
 		public readonly IService<User> _UserService;
 		public readonly IAdvertListingService _AdvertListingService;
         private readonly IService<AdvertComment> _serviceComment;
+        private readonly IService<Advert> _serviceAdvert;
 
 
-        public AdvertController(ICategoryAdvertService categoryAdvertService, IService<Category> categoryService, IAdvertService advertService, IService<User> userService, IAdvertListingService advertListingService, IService<AdvertComment> serviceComment)
+        public AdvertController(ICategoryAdvertService categoryAdvertService, IService<Category> categoryService, IAdvertService advertService, IService<User> userService, IAdvertListingService advertListingService, IService<AdvertComment> serviceComment, IService<Advert> serviceAdvert)
         {
             _categoryAdvertService = categoryAdvertService;
             _CategoryService = categoryService;
@@ -27,6 +28,7 @@ namespace aspnet_mvc_ads.Controllers
             _UserService = userService;
             _AdvertListingService = advertListingService;
             _serviceComment = serviceComment;
+            _serviceAdvert = serviceAdvert;
         }
 
         public async Task<IActionResult> Search(int CategoryId, string query = "")
@@ -82,27 +84,51 @@ namespace aspnet_mvc_ads.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Detail(int id)
+        public async Task<IActionResult> Detail(int? id)
+
 		{
-			//var advert = await _categoryAdvertService.                 _service.GetProductByCategoriesBrandsAsync(id);
-			await _advertService.ClickUpdating(id);
-			var advert= await _advertService.FindAsync(id);
-			return View(advert);
-
+            //var advert = await _categoryAdvertService.                 _service.GetProductByCategoriesBrandsAsync(id);
+            //await _advertService.ClickUpdating(id);
+            if (id is not null)
+            {
+                var advert = await _advertService.FindAsync(id.Value);
+                ViewData["userName"] = Request.Cookies["userName"];
+                ViewData["userEmail"] = Request.Cookies["userEmail"];
+                return View(advert);
+            }
+            else
+            {
+                return BadRequest();
+            }
 		}
-
-
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AdvertComment advertcommet)
+        public async Task<ActionResult> Create(string review, int id)
         {
-            _serviceComment.Add(advertcommet);
+            var advert = await _serviceAdvert.FindAsync(id);
+            var user = await _UserService.FirstOrDefaultAsync(u => u.Email == Request.Cookies["userEmail"]);
+
+            AdvertComment advertComment = new AdvertComment();
+            advertComment.Advert = advert;
+            advertComment.user = user;
+            advertComment.Comment = review;
+            _serviceComment.Add(advertComment);
             _serviceComment.SaveChanges();
-            return RedirectToAction("Detail");
+            return RedirectToAction("Detail",new {id = advert.Id});
 
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(AdvertComment advertcommet)
+        //{
+        //    _serviceComment.Add(advertcommet);
+        //    _serviceComment.SaveChanges();
+        //    return RedirectToAction("Detail");
+
+        //}
 
 
     }

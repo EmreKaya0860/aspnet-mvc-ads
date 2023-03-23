@@ -208,12 +208,12 @@
 
 
 
-                                            <form action="#" class="row">
+                                            <form asp-action="Create" asp-route-id="@Model.Id" class="row">
                                                 <div class="col-lg-6">
-                                                    <input type="text" name="name" id="name" class="form-control" placeholder="adınız...">
+                                                    <input type="text" name="name" id="name" class="form-control" @*placeholder="adınız..."*@ value="@ViewData["userName"]">
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <input type="email" name="email" id="email" class="form-control" placeholder="mail adresiniz...">
+                                                    <input type="email" name="email" id="email" class="form-control" @*placeholder="mail adresiniz..."*@ value="@ViewData["userEmail"]">
                                                 </div>
                                                 <div class="col-12">
                                                     <textarea name="review" id="review" rows="10" class="form-control" placeholder="mesajınız..."></textarea>
