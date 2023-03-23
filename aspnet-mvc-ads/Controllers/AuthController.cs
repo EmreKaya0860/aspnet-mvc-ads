@@ -1,11 +1,8 @@
 ﻿using App.Data.Entity;
 using App.Service.Abstract;
-using aspnet_mvc_ads.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Common;
 using System.Security.Claims;
 
 namespace aspnet_mvc_ads.Controllers
@@ -13,12 +10,10 @@ namespace aspnet_mvc_ads.Controllers
     public class AuthController : Controller
     {
         private readonly IService<User> _userService;
-        //readonly UserManager<User> _userManager;
 
         public AuthController(IService<User> userService)
         {
             _userService = userService;
-            //_userManager = userManager;
         }
 
         public IActionResult Register()
@@ -99,69 +94,8 @@ namespace aspnet_mvc_ads.Controllers
             Response.Cookies.Delete("userAdress");
             return Redirect("/Login");
         }
-        public IActionResult ResetPassword()
-        {
-
-            return View();
-        }
-
-        //[HttpPost]
-        //public async Task<IActionResult> ResetPasswordAsync(ResetPasswordModel model)
-        //{
-        //    var user = await _userManager.FindByEmailAsync(model.Email);
-
-        //    if (user != null)
-        //    {
-        //        string resettoken = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-        //        string passwordresetlink = Url.Action("UpdatePassword", "User", new { userId = user.Id, token = resettoken },HttpContext.Request.Scheme);
-
-        //        Utils.ResetPassword.PasswordSendMail(passwordresetlink);
-        //        ViewBag.State = true;
-        //    }
-
-        //    else
-        //    {
-        //        ViewBag.State = false;
-        //    }
-        //    return View();
-        //}
-
-
-        //public IActionResult UpdatePassword(string userId,string token)
-        //{
-        //    TempData["userId"] = userId;
-        //    TempData["token"] = token;
-
-        //    return View();
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> UpdatePasswordAsync([Bind("NewPassword")] ResetPasswordModel model)
-        //{
-        //    string token = TempData["token"].ToString();
-        //    string userId = TempData["userId"].ToString();
-
-        //    var user = await _userManager.FindByIdAsync(userId);
-
-        //    if (user != null)
-        //    {
-        //        IdentityResult result = await _userManager.ResetPasswordAsync(user, token, model.NewPassword);
-
-        //        if (result.Succeeded)
-        //        {
-        //            await _userManager.UpdateSecurityStampAsync(user);
-        //            TempData["Success"] = "Başarıyla güncellenmiştir";
-                    
-        //        }
-        //    }
-
-        //    else
-        //    {
-        //        ModelState.AddModelError("", "Böyle bir kullanıcı bulunamadı");
-        //    }
-
-        //    return View();
-        //}
+    
+       
 
     }
 }
