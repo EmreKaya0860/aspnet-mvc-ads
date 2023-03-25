@@ -59,20 +59,24 @@ namespace aspnet_mvc_ads.Controllers
                     new Claim(ClaimTypes.Role, "User"),
                     new Claim("UserId", user.Id.ToString())
                 };
-				Response.Cookies.Append("userguid", Guid.NewGuid().ToString());
+                var guid  = Guid.NewGuid().ToString();
+				Response.Cookies.Append("userguid", guid);
                 Response.Cookies.Append("userName", user.Name);
                 Response.Cookies.Append("userPhone", user.Phone);
                 Response.Cookies.Append("userEmail", user.Email);
                 Response.Cookies.Append("userAdress", user.Address);
 
-
-
-                var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                user.userGuid = guid;
+                _userService.Update(user);
+                _userService.SaveChanges();
+                Console.WriteLine("uertilen guid : " + guid);
+                Console.WriteLine("user guid : " + user.userGuid);
+				var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new(userAuth);
                 await HttpContext.SignInAsync(principal);
 
-                
-                return RedirectToAction("Index", "Home");
+
+				return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -83,15 +87,23 @@ namespace aspnet_mvc_ads.Controllers
             return View();
         }
 
+
+
         [Route("/Logout")]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+            var user = _userService.Get(u => u.userGuid == Request.Cookies["userguid"]);
+			user.userGuid = null;
+			_userService.Update(user);
+			_userService.SaveChanges();
+			await HttpContext.SignOutAsync();
 			Response.Cookies.Delete("userguid");
             Response.Cookies.Delete("userName");
             Response.Cookies.Delete("userPhone");
             Response.Cookies.Delete("userEmail");
             Response.Cookies.Delete("userAdress");
+            
+
             return Redirect("/Login");
         }
     

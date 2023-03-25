@@ -48,6 +48,11 @@ label {
   color: #848484;
 }
 
+.user-profile {
+    font-size: 100px;
+    background-color: red;
+}
+
 .nav-pills .nav-link {
   font-size: 16px;
 }

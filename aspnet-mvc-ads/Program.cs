@@ -25,7 +25,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.LoginPath = "/Login";
     options.LogoutPath = "/Logout";
     options.Cookie.Name = "Administrator";
-    options.Cookie.MaxAge = TimeSpan.FromDays(1);
 });
 
 builder.Services.AddAuthorization(options =>

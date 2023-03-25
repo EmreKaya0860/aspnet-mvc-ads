@@ -11,6 +11,8 @@ namespace App.Data.Entity
 	{
         public int Id { get; set; }
 
+        [Display(Name ="userGuid")]
+        public string? userGuid { get; set; }
 
         [Display(Name = "İsim"), StringLength(100)]
         public string Name { get; set; }
@@ -29,7 +31,7 @@ namespace App.Data.Entity
 
 
         [Display(Name = "Adres"), StringLength(200)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
 
         public virtual List<Advert>? Adverts { get; set; }

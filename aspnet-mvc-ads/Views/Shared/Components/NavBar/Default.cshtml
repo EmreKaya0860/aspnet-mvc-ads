@@ -29,7 +29,6 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" asp-controller="Home" asp-action="AboutUs">Hakkımızda</a>
 									<a class="dropdown-item" asp-controller="Home" asp-action="ContactUs">İletişim</a>
-									<a class="dropdown-item" href="user-profile.html">Kullanıcı Profili</a>
 									<a class="dropdown-item" asp-controller="Home" asp-action="ErrorPage">404 Page</a>
 									<a class="dropdown-item" asp-controller="Home" asp-action="Package">Package</a>
 									<a class="dropdown-item" asp-controller="Advert" asp-action="Detail" asp-route-id="1">İlan Detay</a>
@@ -69,10 +68,17 @@
 								<li class="nav-item">
 									<a class="nav-link login-button" asp-controller="Auth" asp-action="Login">Giriş</a>
 								</li>
-
 							}
 							
 						</ul>
+						@if (TempData["UserBilgisi"] is not null)
+						{
+							<ul class="navbar-nav mt-10">
+								<li class="nav-item ml-3 pt-4">
+									<a class="profile-icon" asp-controller="Home" asp-action="Profile"><i class="fa-solid fa-user fa-2xl"><h4 class="mt-2">@TempData["UserName"]</h4></i></a>
+								</li>
+							</ul>
+						}
 					</div>
 				</nav>
 			</div>

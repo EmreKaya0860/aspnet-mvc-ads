@@ -18,6 +18,7 @@ namespace aspnet_mvc_ads.ViewComponents
             if (Request.Cookies["userguid"] is not null)
             {
                 TempData["UserBilgisi"] = Request.Cookies["userguid"];
+                TempData["UserName"] = Request.Cookies["userName"];
             }
             else
             {
