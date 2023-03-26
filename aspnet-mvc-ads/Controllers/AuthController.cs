@@ -107,7 +107,24 @@ namespace aspnet_mvc_ads.Controllers
             return Redirect("/Login");
         }
     
-       
+       public async Task<IActionResult> ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email, string password)
+        {
+            var model = _userService.Get(u => u.Email == email);
+            if (model == null)
+            {
+                return View(model);
+            }
+            model.Password = password;
+            _userService.Update(model);
+            _userService.SaveChanges();
+            return RedirectToAction("Login");
+        }
 
     }
 }
