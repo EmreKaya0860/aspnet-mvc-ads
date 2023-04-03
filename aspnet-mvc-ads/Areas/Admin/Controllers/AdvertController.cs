@@ -1,12 +1,13 @@
 ﻿using App.Data.Entity;
 using App.Service.Abstract;
 using aspnet_mvc_ads.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace aspnet_mvc_ads.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize(Policy = "AdminPolicy")]
     public class AdvertController : Controller
     {
         private readonly IService<Advert> _service;

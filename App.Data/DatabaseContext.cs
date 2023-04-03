@@ -28,19 +28,20 @@ namespace App.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-	
 
 
-			//modelBuilder.Entity<Card>()
-			//    .HasRequired(c => c.Stage)
-			//    .WithMany()
-			//    .WillCascadeOnDelete(false);
-
-			//modelBuilder.Entity<Side>()
-			//    .HasRequired(s => s.Stage)
-			//    .WithMany()
-			//    .WillCascadeOnDelete(false);
-			base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+					Id = 7,
+                    Phone = "",
+                    Email = "admin@gmail.com",
+                    IsAdmin = true,
+                    Name = "admin",
+                    Password = "123"
+                }
+                );
+            base.OnModelCreating(modelBuilder);
 		}
 
 	}

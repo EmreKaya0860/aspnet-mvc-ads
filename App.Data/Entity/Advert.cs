@@ -14,6 +14,9 @@ namespace App.Data.Entity
         public string? Description { get; set; }
         public int ClickCount { get; set; } = 0;
         public int? UserId { get; set; }
+
+        [Display(Name ="Fiyat")]
+        public float Price { get; set; } 
        
         public virtual User? User { get; set; }
 

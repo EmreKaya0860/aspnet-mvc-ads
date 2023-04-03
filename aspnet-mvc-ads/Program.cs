@@ -22,8 +22,9 @@ builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie( options =>
 {
-    options.LoginPath = "/Login";
-    options.LogoutPath = "/Logout";
+    options.LoginPath = "/Admin/Login";
+    options.AccessDeniedPath = "/AccessDenied";
+    options.LogoutPath = "/Admin/Login/Logout";
     options.Cookie.Name = "Administrator";
 });
 

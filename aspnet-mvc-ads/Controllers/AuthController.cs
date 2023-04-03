@@ -56,7 +56,7 @@ namespace aspnet_mvc_ads.Controllers
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Role, "User"),
+                    new Claim("Role", user.IsAdmin ? "Admin" : "User"),
                     new Claim("UserId", user.Id.ToString())
                 };
                 var guid  = Guid.NewGuid().ToString();
@@ -69,8 +69,6 @@ namespace aspnet_mvc_ads.Controllers
                 user.userGuid = guid;
                 _userService.Update(user);
                 _userService.SaveChanges();
-                Console.WriteLine("uertilen guid : " + guid);
-                Console.WriteLine("user guid : " + user.userGuid);
 				var userAuth = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new(userAuth);
                 await HttpContext.SignInAsync(principal);

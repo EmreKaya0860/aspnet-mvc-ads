@@ -33,6 +33,7 @@ namespace App.Data.Entity
         [Display(Name = "Adres"), StringLength(200)]
         public string? Address { get; set; }
 
+        public bool IsAdmin { get; set; }
 
         public virtual List<Advert>? Adverts { get; set; }
         public virtual List<Setting>? Settings { get; set; }
