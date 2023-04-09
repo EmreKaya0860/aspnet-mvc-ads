@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace aspnet_mvc_ads.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize(Policy = "AdminPolicy")]
+    [Area("Admin")]
     public class AdvertController : Controller
     {
         private readonly IService<Advert> _service;

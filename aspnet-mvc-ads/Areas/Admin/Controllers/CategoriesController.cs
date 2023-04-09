@@ -7,7 +7,7 @@ using System.Drawing.Text;
 
 namespace aspnet_mvc_ads.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize(Policy = "AdminPolicy")]
+    [Area("Admin")]
     public class CategoriesController : Controller
     {
         private readonly IService<Category> _service;

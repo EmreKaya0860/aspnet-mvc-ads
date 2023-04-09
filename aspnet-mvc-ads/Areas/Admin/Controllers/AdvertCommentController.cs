@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace aspnet_mvc_ads.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize(Policy = "AdminPolicy")]
+    [Area("Admin")]
     public class AdvertCommentController : Controller
     {
         private readonly IService<AdvertComment> _service;
